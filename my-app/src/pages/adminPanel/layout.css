@@ -1,0 +1,17 @@
+.dash--layout_container{
+    display: flex;
+    flex-direction: row;
+}
+.dash--main_content.opened{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    padding: 20px 24px;
+    border: solid black 1px;
+}
+.dash--main_content.closed{
+    width: calc(100% - 100px);
+    margin-left: 100px;
+    padding: 20px 24px;
+    border: solid black 1px;
+
+}

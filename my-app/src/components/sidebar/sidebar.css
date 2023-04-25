@@ -1,0 +1,7 @@
+.sidebar--container{
+    position: absolute;
+    padding: 24px 0;
+    height: 100vh;
+    width: 200px;
+    border: 1px solid black;
+}
