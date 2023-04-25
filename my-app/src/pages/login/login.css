@@ -1,0 +1,25 @@
+.LoginWrapper {
+  width: 500px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+  color: white;
+}
+
+
+.headingsLoginContainer{
+    text-align: center;
+    
+}
+.ContentContainer{
+    opacity: 0.9;
+    background-color: royalblue;
+    padding: 30px;
+    border-radius: 10px;
+}
+.login--form{
+    display: flex;
+    flex-direction: column;
+}
