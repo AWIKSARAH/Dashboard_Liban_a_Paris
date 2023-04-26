@@ -1,4 +1,5 @@
 .sidebar--container {
+    box-shadow: 2px 2px 2px #00000055;
 
     position: fixed;
     display: flex;
@@ -105,7 +106,7 @@ text-decoration: none;
       top: 0;
       left: 0;
       border-radius: 0;
-      transition:  0.3s ease-in-out; 
+      transition:  0.5s ease-in-out; 
       left: -100%;
     }
     .sidebar--container.open {

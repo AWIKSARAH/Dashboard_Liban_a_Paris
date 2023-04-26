@@ -4,6 +4,7 @@
     color:white;
     border-radius: 20px;
     width: 95%;
+    box-shadow: 2px 2px 2px #00000055;
 
 }
 .page--header_container h1{
