@@ -1,16 +1,13 @@
 import "./sidebar.css";
 import whiteLogo from "../../white-logo.png";
-import { Link, useLocation } from "react-router-dom";
-import {  Logout, Settings, Menu } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { Logout, Settings, Menu, Close } from "@mui/icons-material";
 import { useState } from "react";
 import CustomLink from "./CustomLink";
-import { sideBarRoutes } from "./sideBarRoutes";
-
-
+import { sideBarPaths } from "./sideBarPaths";
 
 function Sidebar() {
   var mediaSize = window.matchMedia("(min-width: 768px)");
-  const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(
     mediaSize.matches ? true : false
   );
@@ -20,42 +17,33 @@ function Sidebar() {
     <>
       <div className="sidebar--button_container">
         <button className="sidebar--button" onClick={toggleSidebar}>
-          <Menu />
+          {isSidebarOpen?<Close/>:<Menu />}
         </button>
       </div>
-      {isSidebarOpen && (
-        <aside className="sidebar--container">
-          <div className="sidebar--top">
-            <img src={whiteLogo} alt="logo" width={180} height={60} />
-            <div className="sidebar--nav_container">
-              {linkMapper(sideBarRoutes, location)}
-            </div>
+      <aside className={`sidebar--container ${isSidebarOpen ? 'open' : ''}`}>
+        <div className="sidebar--top">
+          <img src={whiteLogo} alt="logo" width={180} height={60} />
+          <div className="sidebar--nav_container">
+            {linkMapper(sideBarPaths)}
           </div>
-          <div className="sidebar--bottom sidebar--nav_container">
-            <Link>
-              <Settings />
-              Settings
-            </Link>
-            <Link>
-              <Logout />
-              Logout
-            </Link>
-          </div>
-        </aside>
-      )}
+        </div>
+        <div className="sidebar--bottom sidebar--nav_container">
+          <Link>
+            <Settings />
+            Settings
+          </Link>
+          <Link to="/login">
+            <Logout />
+            Logout
+          </Link>
+        </div>
+      </aside>
     </>
   );
 }
 export default Sidebar;
-function linkMapper(sideBarRoutes, location) {
-  return sideBarRoutes.map((route, index) => {
-    return (
-      <CustomLink
-        key={index}
-        location={location}
-        route={route}
-      ></CustomLink>
-    );
+function linkMapper(sideBarPaths) {
+  return sideBarPaths.map((path,index) => {
+    return <CustomLink key={index} path={path}></CustomLink>;
   });
 }
-

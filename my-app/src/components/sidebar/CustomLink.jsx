@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function CustomLink(props) {
+  const location = useLocation();
+
     return (
       <Link
-        to={props.route.path}
-        className={props.location.pathname === props.route.path ? "selected" : ""}
+        to={props.path.to}
+        className={location.pathname === props.path.to ? "selected" : ""}
       >
-        {props.location.pathname === props.route.path ? <span></span> : ""}
-        {props.route.icon}
-        <p>{props.route.label}</p>
+        {location.pathname === props.path.to ? <span></span> : ""}
+        {props.path.icon}
+        <p>{props.path.label}</p>
       </Link>
     );
   }
