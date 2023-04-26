@@ -1,5 +1,9 @@
+import PageHeader from "../../components/pageHeader";
+
 function HomePage() {
-    return ( <h1>This is Home page</h1> );
+    return ( <>
+    <PageHeader label="Home Page"/>
+    </> );
 }
 
 export default HomePage;

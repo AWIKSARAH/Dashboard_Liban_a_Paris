@@ -1,0 +1,23 @@
+.dash--layout_container{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    height:calc(100vh - 20px);
+    overflow-y: scroll;
+}
+.dash--main_content{
+    width: calc(100% - 300px);
+    margin-left: 280px;
+    margin-right: 20px;
+    padding: 0 24px;
+}
+
+@media (max-width: 767px) {
+    .dash--main_content{
+        width: 100%;
+        margin: auto;
+        margin-top: 0px;
+    }
+}

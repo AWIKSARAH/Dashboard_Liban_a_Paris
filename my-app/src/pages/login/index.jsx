@@ -3,8 +3,9 @@ import './login.css'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import logo from "../../Le-Liban-A-Paris-Noir-removebg-preview.png";
+import { Link } from 'react-router-dom';
 
-export default function () {
+export default function Login() {
   return (
     <div className="LoginWrapper">
 
@@ -29,9 +30,9 @@ export default function () {
           <Button variant="contained" color="success">
             Login
           </Button>
-          <a href="#">
+          <Link href="#">
             <u>Forget password</u>
-          </a>
+          </Link>
         </form>
       </div>
     </div>
