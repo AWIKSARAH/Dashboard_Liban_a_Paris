@@ -1,25 +1,104 @@
 .LoginWrapper {
-  width: 500px;
+    position: relative;
+  width: 600px;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin: auto;
   justify-content: center;
-  color: white;
+  color: #333333;
+ 
 }
+
 
 
 .headingsLoginContainer{
     text-align: center;
     
 }
-.ContentContainer{
-    opacity: 0.9;
-    background-color: royalblue;
-    padding: 30px;
+
+
+.ContentContainer {
+    position:static;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-}
+    box-shadow: 0 8px 32px 0 rgba(251, 251, 251, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+
 .login--form{
+    position: static;
     display: flex;
     flex-direction: column;
+    gap :20px;
 }
+
+.login--button{
+    height:3.4rem;
+}
+
+.login--button:hover{
+    transform: scale(1.02);
+    transition: .2s ease-in-out;
+}
+/* .login--form img{
+    position: absolute;
+    top :20px;
+} */
+
+.login--logo_above{
+    display: none;
+}
+.login--logo_bottom{
+    display: block;
+}
+
+@media (max-width: 768px) {
+.LoginWrapper {
+justify-content: space-around;
+}
+    .login--logo_above{
+        display: block;
+    }
+    .login--logo_bottom{
+        display: none;
+    }
+    .LoginWrapper {
+      padding: 0 20px;
+     
+    }
+    
+    .ContentContainer {
+        max-width: 100%;
+        min-width: 25rem;
+    }
+    .text-field{
+        width: 100%;
+    }
+    
+  
+  } 
+  
+  @media (max-width: 480px) {
+    .login--form {
+      font-size: 0.8em;
+    }
+
+    
+    .login--button {
+      height: 2.8rem;
+    }
+ 
+    .text-field{
+        width: 100%;
+    }
+    
+ 
+   }
+  
+  
+  

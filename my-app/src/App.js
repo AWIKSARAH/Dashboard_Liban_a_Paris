@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AllRouts from './components/routes';
+import { useState } from 'react';
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
      <BrowserRouter >
      <AllRouts />
+  
      </BrowserRouter>
     </div>
   );
