@@ -3,7 +3,7 @@
     padding: 10px;
     color:white;
     border-radius: 20px;
-    width: 95%;
+    width: calc(100% - 21px);
     box-shadow: 2px 2px 2px #00000055;
 
 }

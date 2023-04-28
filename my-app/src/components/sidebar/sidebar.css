@@ -115,7 +115,6 @@ text-decoration: none;
     .sidebar--nav_container {
       flex-direction: column;
       justify-content: space-between;
-      height: 68px;
     }
     .sidebar--nav_container > a {
       height: 100%;
@@ -123,7 +122,11 @@ text-decoration: none;
       justify-content: center;
     }
     .sidebar--nav_container > a > span {
-      display: none;
+      width: 50%!important;
+      left:25%!important;
+        height: 3.71% !important;;
+      bottom: 0!important;
+      top: unset!important;
     }
     .sidebar--button{
       color: #bad679;
