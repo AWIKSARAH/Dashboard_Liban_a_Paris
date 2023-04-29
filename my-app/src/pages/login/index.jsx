@@ -1,17 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import "./login.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import logo from "../../Le-Liban-A-Paris-Noir-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../common/Context";
+import { useSignIn } from "react-auth-kit";
 
 
 export default function Login() {
-  const {  setToken } = useContext(UserContext);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const signIn = useSignIn()
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setLoginData((prevState) => ({
@@ -24,7 +24,6 @@ export default function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     try {
       const response = await axios.post(
         "http://localhost:5000/api/user/login",
@@ -35,14 +34,18 @@ export default function Login() {
       );
 
       const token = response.data.token;
-      setToken(token);
-
-      console.log(token);
-      localStorage.setItem("token", token); 
-      navigate("/home");
+        signIn(
+          {
+            token,
+            expiresIn:3600,
+            tokenType:"Bearer",
+            authState:{email:loginData.email}
+          }
+        )
+      navigate("/secure/home");
       // store token in localStorage
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 

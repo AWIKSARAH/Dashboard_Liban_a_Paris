@@ -3,16 +3,15 @@ import React
 from "react";
 import "./layout.css";
 import SideBar from "../sidebar";
+import { Outlet } from "react-router";
 
 export default function Layout({children}) {
-  console.log(children);
-  // const [sidebarOpen,setSidebarOpen]=useState(true)
   return (
     <div className="dash--layout_container">
       <SideBar />
       <div className='dash--main_content'>
         
-        {children}
+        <Outlet/>
       </div>
     </div>
   );
