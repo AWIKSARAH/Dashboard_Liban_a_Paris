@@ -5,10 +5,10 @@ function CustomLink(props) {
 
     return (
       <Link
-        to={props.path.to}
-        className={location.pathname === props.path.to ? "selected" : ""}
+        to={props.path.path}
+        className={location.pathname === props.path.path ? "selected" : ""}
       >
-        {location.pathname === props.path.to ? <span></span> : ""}
+        {location.pathname === props.path.path ? <span></span> : ""}
         {props.path.icon}
         <p>{props.path.label}</p>
       </Link>

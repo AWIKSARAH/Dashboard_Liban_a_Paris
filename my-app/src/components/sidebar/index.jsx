@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Logout, Settings, Menu, Close } from "@mui/icons-material";
 import { useState } from "react";
 import CustomLink from "./CustomLink";
-import { sideBarPaths } from "./sideBarPaths";
+import { routes } from "../../common/protectedRoutes";
 
 function Sidebar() {
   var mediaSize = window.matchMedia("(min-width: 768px)");
@@ -24,7 +24,7 @@ function Sidebar() {
         <div className="sidebar--top">
           <img src={whiteLogo} alt="logo" width={180} height={60} />
           <div className="sidebar--nav_container">
-            {linkMapper(sideBarPaths)}
+            {linkMapper(routes)}
           </div>
         </div>
         <div className="sidebar--bottom sidebar--nav_container">
@@ -42,8 +42,8 @@ function Sidebar() {
   );
 }
 export default Sidebar;
-function linkMapper(sideBarPaths) {
-  return sideBarPaths.map((path,index) => {
-    return <CustomLink key={index} path={path}></CustomLink>;
+function linkMapper(routes) {
+  return routes.map((route,index) => {
+    return <CustomLink key={index} path={route}></CustomLink>;
   });
 }
