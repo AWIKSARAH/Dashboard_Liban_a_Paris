@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "../../pages/login/index";
-import ProtectedRoutes from "../protectedRoutes";
 import { routes } from "../../common/routesArray";
 import { RequireAuth } from "react-auth-kit";
 import Layout from "../layout";

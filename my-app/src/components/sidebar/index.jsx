@@ -1,6 +1,6 @@
 import "./sidebar.css";
 import whiteLogo from "../../white-logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Logout, Settings, Menu, Close } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import CustomLink from "./CustomLink";
