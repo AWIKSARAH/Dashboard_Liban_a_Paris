@@ -1,48 +1,46 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./login.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import logo from "../../Le-Liban-A-Paris-Noir-removebg-preview.png";
-import { Link } from 'react-router-dom';
-
-
-import Cookies from "universal-cookie";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { createContext } from "react";
-import Context from "../../common/Context";
+import { UserContext } from "../../common/Context";
 
-export default function Login (props) {
+
+export default function Login() {
+  const {  setToken } = useContext(UserContext);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [Token,setToken] = useState("");
-
-  function getToken (token) {
-    props.setToken(token)
-  }
-  
+  const navigate = useNavigate();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setLoginData((prevState) => ({
       ...prevState,
       [name]: value,
-    }
-    ));
-    console.log(loginData);
+    }));
+    localStorage.setItem(name, value); // update localStorage with input values
   };
-console.log(loginData);
+  // console.log(loginData);
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/user/login", {
-        email: loginData.email,
-        password: loginData.password,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/user/login",
+        {
+          email: loginData.email,
+          password: loginData.password,
+        }
+      );
 
-      setToken(response.data.token);
-      getToken(Token)
-      // store the token in your global state using useContext
+      const token = response.data.token;
+      setToken(token);
 
+      console.log(token);
+      localStorage.setItem("token", token); 
+      navigate("/home");
+      // store token in localStorage
     } catch (error) {
       console.error(error.message);
     }
@@ -50,7 +48,6 @@ console.log(loginData);
 
   return (
     <div className="LoginWrapper">
-      
       <img
         className="login--logo_above"
         src={logo}
