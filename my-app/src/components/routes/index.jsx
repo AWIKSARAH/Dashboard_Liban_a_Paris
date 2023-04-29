@@ -4,10 +4,12 @@ import Login from "../../pages/login/index";
 import HomePage from "../../pages/home";
 import ProtectedRoutes from "../protectedRoutes";
 import { UserContext } from "../../common/Context";
+import {Loader} from "../loader/loader";
 
 export default function AllRouts() {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const providerValues = useMemo(
     () => ({ token, setToken }),
     [token, setToken]
@@ -18,10 +20,26 @@ export default function AllRouts() {
    }
   }, [token]);
 
+
+  useEffect(() => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false);
+    },5000)
+  }, [])
+  
+
   return (
-    <div>
+    <div className="allRoute">
       <UserContext.Provider value={providerValues}>
-        <Routes>
+       
+        {/* {isLoading?} */}
+
+        {
+          isLoading?
+          <Loader value={isLoading}/>:
+        <Routes> 
+          data-testid="loader"
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<ProtectedRoutes />}>
             <Route path="/home" element={<HomePage />} />
@@ -30,7 +48,7 @@ export default function AllRouts() {
             <Route path="/4" element={<HomePage />} />
             <Route path="/5" element={<HomePage />} />
           </Route>
-        </Routes>
+        </Routes>}
       </UserContext.Provider>
     </div>
   );
