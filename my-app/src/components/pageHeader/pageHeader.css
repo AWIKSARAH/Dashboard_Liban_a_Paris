@@ -5,6 +5,7 @@
     border-radius: 20px;
     width: calc(100% - 21px);
     box-shadow: 2px 2px 2px #00000055;
+    margin-bottom: 20px;
 
 }
 .page--header_container h2{
