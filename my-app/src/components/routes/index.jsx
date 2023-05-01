@@ -10,7 +10,7 @@ export default function AllRouts() {
     <div>
       <Routes>
         <Route
-          path={"/secure"}
+          path={"/"}
           element={
             <RequireAuth loginPath={"/login"}>
               <div>
