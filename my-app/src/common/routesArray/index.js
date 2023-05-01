@@ -23,7 +23,7 @@ export const routes = [
     path: "/secure/2",
     label: "Menu Item 2",
     icon: <Home />,
-    element: <Table rows={rows} cells={cells} />,
+    element: <Table rows={rows} cells={cells} title='Example' />,
   },
   {
     path: "/secure/3",
@@ -50,4 +50,3 @@ export const routes = [
     element: <HomePage />,
   },
 ];
-const data = [];

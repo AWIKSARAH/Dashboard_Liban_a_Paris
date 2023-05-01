@@ -14,6 +14,9 @@ function tableHead(props) {
             </TableCell>
           );
         })}
+             <TableCell align="left" >
+Edit            </TableCell> <TableCell align="left" >
+Deltete            </TableCell>
       </TableRow>
     </TableHead>
   );
