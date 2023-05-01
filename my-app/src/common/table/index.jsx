@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
 import TableBody from "./tableBody";
 import { CSVLink } from "react-csv";
+import PageHeader from "../../components/pageHeader";
 
 function TableContent(props) {
   function createData(cells) {
@@ -32,8 +33,9 @@ console.log(filteredRows);
 
   return (
     <Box sx={{ width: "100%" }}>
-    <div><h1>Manage The {props.title}</h1></div>
-      <TableContainer component={Paper} sx={{ overflow: "auto" }}>
+      <PageHeader label={props.title} />
+
+      <TableContainer component={Paper} sx={{ overflow: "auto" ,borderRadius:"20px" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TextField
             label="Search"
