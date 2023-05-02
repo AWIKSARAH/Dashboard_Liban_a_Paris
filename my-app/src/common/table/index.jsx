@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Table, TableContainer, TextField, Button,Pagination } from "@mui/material";
+import {
+  Box,
+  Table,
+  TableContainer,
+  TextField,
+  Button,
+  Pagination,
+} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
 import TableBody from "./tableBody";
@@ -26,7 +33,7 @@ function TableContent(props) {
   //   );
   //   setFilteredRows(filtered);
   // };
-  
+
   const handlePageChange = (event, value) => {
     props.setCurrentPage(value);
   };
@@ -34,49 +41,48 @@ function TableContent(props) {
   // const handleRowClick = (id) => {
   //   alert(id);
   // };
-  
+
   const handleInputChange = (value) => {
     setSearchQuery(value);
-  }
+  };
   console.log(filteredRows);
   return (
-    <Box  sx={{ overflow: "auto" }}>
-        
-    <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
-      <PageHeader label={props.title} />
+    <Box sx={{ overflow: "auto" }}>
+      <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
+        <PageHeader label={props.title} />
 
-      <TableContainer 
-        component={Paper}
-        sx={{ overflow: "auto", borderRadius: "20px" }}
-      >
-        <Table sx={{ minWidth: '100%' }}>
-        <SearchBar onSearchClick={handleSearchChange} />
-
-          <TableHead cell={props.cells} />
-
-          <TableBody rows={filteredRows}></TableBody>
-        </Table>
-        <CSVLink
-          data={rows}
-          headers={props.cells}
-          filename={`${props.title}.csv`}
+        <TableContainer
+          component={Paper}
+          sx={{ overflow: "auto", borderRadius: "20px" }}
         >
-          <Button color="success" variant="contained">
-            Export to CSV
-          </Button>
-        </CSVLink>
-      </TableContainer>
-       <Pagination
+          <Table sx={{ minWidth: "100%" }}>
+            <SearchBar onSearchClick={handleSearchChange} />
+
+            <TableHead cell={props.cells} />
+
+            <TableBody rows={filteredRows}></TableBody>
+          </Table>
+          <CSVLink
+            data={rows}
+            headers={props.cells}
+            filename={`${props.title}.csv`}
+          >
+            <Button color="success" variant="contained">
+              Export to CSV
+            </Button>
+          </CSVLink>
+        </TableContainer>
+        <Pagination
           shape="rounded"
           color="success"
-          page={5}
-          count={props.pageCount || 5}
+          page={props.currentPage}
+          count={props.pageCount || 1}
           showFirstButton
           showLastButton
-          size="small"
+          size="large"
           onChange={handlePageChange}
         />
-    </Box>
+      </Box>
     </Box>
   );
 }
