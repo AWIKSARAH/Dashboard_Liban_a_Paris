@@ -35,7 +35,7 @@ console.log(filteredRows);
     <Box sx={{ width: "100%" }}>
       <PageHeader label={props.title} />
 
-      <TableContainer component={Paper} sx={{ overflow: "auto" ,borderRadius:"20px" }}>
+      <TableContainer component={Paper} sx={{ overflow: "auto"  }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TextField
             label="Search"

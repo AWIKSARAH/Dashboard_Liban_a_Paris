@@ -4,3 +4,23 @@
 *{
   font-family: 'Roboto', sans-serif;
 }
+/* :root{
+  --primary:#437c24;
+  --primary-derv:#9ec689;
+  --secondary:#f9f3ed;
+  --secondary-derv:#dbf7cc;
+  --accent:#CC3D3F;
+  --accent-derv:#5e2e2f;
+  --black:#2d2d2e;
+  
+} */
+:root{
+  --primary:#c02a2c;
+  --primary-derv:#5e2e2f;
+  --secondary:#f7f6f5;
+  --secondary-derv:#dbf7cc;
+  --accent:#5cc436;
+  --accent-derv:#668e50;
+  --black:#2d2d2e;
+  
+}

@@ -42,7 +42,7 @@ export default function Login() {
             authState:{email:loginData.email}
           }
         )
-      navigate("/secure/home");
+      navigate("/home");
       // store token in localStorage
     } catch (error) {
       console.error(error);

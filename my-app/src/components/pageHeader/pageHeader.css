@@ -1,5 +1,5 @@
 .page--header_container{
-    background-color: #4f7f33;
+    background-color: var(--primary);
     padding: 10px;
     color:white;
     border-radius: 20px;

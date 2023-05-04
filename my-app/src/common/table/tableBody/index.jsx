@@ -19,7 +19,10 @@ function TableBodyCom(props) {
           key={row._id}
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           onClick={() => handleRowClick(row._id)}
-          style={{ backgroundColor: key % 2 === 0 ? "#d2e8f24f" : "#0080006b" }}
+          style={{
+            backgroundColor:
+              key % 2 === 0 ? "var(--primary-derv)" : "var(--secondary)",
+          }}
         >
           {Object.values(row).map((value, index) => (
             <TableCell key={index} component="th" scope="row">

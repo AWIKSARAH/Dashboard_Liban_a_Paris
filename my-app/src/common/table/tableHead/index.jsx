@@ -5,18 +5,23 @@ import TableRow from "@mui/material/TableRow";
 
 function tableHead(props) {
   return (
-    <TableHead style={{ backgroundColor: "#45893d" , width:'100%'}}>
-      <TableRow width='100%'>
+    <TableHead
+      style={{ backgroundColor: "var(--primary)", width: "100%", color: "white" }}
+    >
+      <TableRow width="100%">
         {props.cell.map((cell, key) => {
           return (
-            <TableCell align="left" id={key}>
+            <TableCell align="left" id={key} sx={{ color: "white" }}>
               {cell}
             </TableCell>
           );
         })}
-             <TableCell align="left" >
-Edit            </TableCell> <TableCell align="left" >
-Deltete            </TableCell>
+        <TableCell align="left" sx={{ color: "white" }}>
+          Edit{" "}
+        </TableCell>{" "}
+        <TableCell align="left" sx={{ color: "white" }}>
+          Delete{" "}
+        </TableCell>
       </TableRow>
     </TableHead>
   );
