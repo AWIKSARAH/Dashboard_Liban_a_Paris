@@ -23,16 +23,11 @@ function TableContent(props) {
   const [filteredRows, setFilteredRows] = useState(rows);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // const handleSearchChange = (event) => {
-  //   const query = searchQuery.toLowerCase();
-  //   setSearchQuery(query);
-  //   const filtered = filteredRows.filter((row) =>
-  //     Object.values(row).some(
-  //       (value) => value && value.toString().toLowerCase().includes(query)
-  //     )
-  //   );
-  //   setFilteredRows(filtered);
-  // };
+  const handleSearchChange = (event) => {
+    const query = searchQuery.toLowerCase();
+    props.setSearchQuery(query);
+   
+  };
 
   const handlePageChange = (event, value) => {
     props.setCurrentPage(value);

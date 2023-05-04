@@ -1,6 +1,7 @@
 import { Home } from "@mui/icons-material";
 import HomePage from "../../pages/home";
 import Table from "../table";
+import PlacesPage from "../../pages/places";
 
 const rows = [
   {
@@ -157,18 +158,11 @@ const cells = ["hello", "world", "bye", "d", "dw"];
 export const routes = [
   { path: "/home", label: "Dashboard", icon: <Home />, element: <HomePage /> },
   {
-    path: "/2",
-    label: "Menu Item 2",
+    path: "/places",
+    label: "Places",
     icon: <Home />,
     element: (
-      <Table
-        rows={rows}
-        cells={cells}
-        pageCount={10}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        title="Example"
-      />
+      <PlacesPage/>
     ),
   },
   { path: "/3", label: "Menu Item 3", icon: <Home />, element: <HomePage /> },
