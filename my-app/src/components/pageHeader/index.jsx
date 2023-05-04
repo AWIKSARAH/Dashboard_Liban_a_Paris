@@ -1,6 +1,15 @@
-import "./pageHeader.css"
+import "./pageHeader.css";
+import SearchBar from "../../components/searchBar";
 function PageHeader(props) {
-    return ( <div className="page--header_container"><h2>{props.label}</h2></div> );
+  const handleSearchChange = (value) => {
+    props.setSearchQuery(value);
+  };
+  return (
+    <div className="page--header_container">
+      <h2>{props.label}</h2>
+      <SearchBar onSearchClick={handleSearchChange} />
+    </div>
+  );
 }
 
 export default PageHeader;

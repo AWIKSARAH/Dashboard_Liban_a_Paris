@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function TableBodyCom(props) {
-  const rows = props.rows.map(createData);
-  function createData(cells) {
-    return { ...cells };
-  }
+  const rows = props.rows.map((cells) => ({ ...cells }));
+
   const handleRowClick = (id) => {
     alert(id);
   };
@@ -22,11 +20,13 @@ function TableBodyCom(props) {
           style={{
             backgroundColor:
               key % 2 === 0 ? "var(--primary-derv)" : "var(--secondary)",
+              color:
+              key % 2 === 0 ? "var(--secondary)" : "black",
           }}
         >
           {Object.values(row).map((value, index) => (
             <TableCell key={index} component="th" scope="row">
-              {value}
+              {value.toString()}
             </TableCell>
           ))}
           <TableCell>

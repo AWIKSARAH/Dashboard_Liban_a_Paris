@@ -1,62 +1,31 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Table,
-  TableContainer,
-  TextField,
-  Button,
-  Pagination,
-} from "@mui/material";
+import React from "react";
+import { Box, Table, TableContainer, Pagination, TableFooter } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
 import TableBody from "./tableBody";
-import { CSVLink } from "react-csv";
-import PageHeader from "../../components/pageHeader";
-import SearchBar from "../../components/searchBar";
+// import { CSVLink } from "react-csv";
+import { Loader } from "../../components/loader";
 
 function TableContent(props) {
-  function createData(cells) {
-    return { ...cells };
-  }
-  const rows = props.rows.map(createData);
+  // const rows = props.rows.map((cells) => ({ ...cells }));
 
-  const [filteredRows, setFilteredRows] = useState(rows);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearchChange = (event) => {
-    const query = searchQuery.toLowerCase();
-    props.setSearchQuery(query);
-  };
 
   const handlePageChange = (event, value) => {
     props.setCurrentPage(value);
   };
 
-  // const handleRowClick = (id) => {
-  //   alert(id);
-  // };
-
-  const handleInputChange = (value) => {
-    setSearchQuery(value);
-  };
-  console.log(filteredRows);
   return (
     <Box sx={{ overflow: "auto" }}>
       <Box sx={{ width: "100%", display: "table", tableLayout: "fixed" }}>
-        <PageHeader label={props.title} />
-
         <TableContainer
           component={Paper}
-          sx={{ overflow: "auto", borderRadius: "20px" }}
+          sx={{ overflow: "auto", borderRadius: "0" }}
         >
           <Table sx={{ minWidth: "100%" }}>
-            <SearchBar onSearchClick={handleSearchChange} />
-
-            <TableHead cell={props.cells} />
-
-            <TableBody rows={filteredRows}></TableBody>
+            <TableHead cell={props.columns} />
+            {!props.isLoading?<TableBody rows={props.rows} />:<div className="table--loading_wrapper"><Loader isLoading={true} /></div>}
           </Table>
-          <CSVLink
+          {/* <CSVLink
             data={rows}
             headers={props.cells}
             filename={`${props.title}.csv`}
@@ -64,18 +33,21 @@ function TableContent(props) {
             <Button color="success" variant="contained">
               Export to CSV
             </Button>
-          </CSVLink>
+          </CSVLink> */}
         </TableContainer>
+          <div className="gg" >
+
         <Pagination
           shape="rounded"
-          color="success"
           page={props.currentPage}
           count={props.pageCount || 1}
           showFirstButton
           showLastButton
           size="large"
           onChange={handlePageChange}
-        />
+          />
+          </div>
+        
       </Box>
     </Box>
   );

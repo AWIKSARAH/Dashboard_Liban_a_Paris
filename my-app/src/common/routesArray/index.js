@@ -3,7 +3,7 @@ import HomePage from "../../pages/home";
 import Table from "../table";
 import PlacesPage from "../../pages/places";
 
-const rows = [
+export const rows = [
   {
     _id: "41",
     name: "Cupcake",
@@ -153,7 +153,7 @@ const rows = [
   },
 ];
 
-const cells = ["hello", "world", "bye", "d", "dw"];
+export const cells = ["hello", "world", "bye", "d", "dw"];
 
 export const routes = [
   { path: "/home", label: "Dashboard", icon: <Home />, element: <HomePage /> },

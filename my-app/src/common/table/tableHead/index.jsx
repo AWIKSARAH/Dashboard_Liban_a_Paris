@@ -2,7 +2,7 @@ import React from "react";
 import TableHead from "@mui/material/TableHead";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-
+import "./tableHead.css"
 function tableHead(props) {
   return (
     <TableHead
@@ -15,13 +15,23 @@ function tableHead(props) {
       <TableRow width="100%">
         {props.cell.map((cell, key) => {
           return (
-            <TableCell align="left" id={key} sx={{ color: "white" }}>
+            <TableCell
+            key={key}
+              align="left"
+              id={key}
+              sx={{ color: "white"}}
+            >
               {cell}
             </TableCell>
           );
         })}
 
-        <TableCell align="left">Action </TableCell>
+        <TableCell
+          align="left"
+          sx={{ color: "white" }}
+        >
+          Action{" "}
+        </TableCell>
       </TableRow>
     </TableHead>
   );
