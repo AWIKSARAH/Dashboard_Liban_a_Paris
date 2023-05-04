@@ -21,7 +21,6 @@ function TableBodyCom(props) {
               key % 2 === 0 ? "var(--primary-derv)" : "var(--secondary)",
             color: key % 2 === 0 ? "var(--secondary)!important" : "black",
           }}
-          onClick={() => handleRowClick(row._id)}
         >
           {Object.values(row).map((value, index) => (
             <TableCell
@@ -34,7 +33,10 @@ function TableBodyCom(props) {
             </TableCell>
           ))}
           <TableCell>
-            <Button>
+            <Button
+          onClick={() => props.handleEdit(row._id)}
+            
+            >
               {" "}
               <FontAwesomeIcon
                 icon={faEdit}

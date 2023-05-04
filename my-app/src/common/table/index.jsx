@@ -30,7 +30,7 @@ function TableContent(props) {
             <Table sx={{ minWidth: "100%" }}>
               <TableHead cell={props.columns} />
               {!props.isLoading ? (
-                <TableBody rows={props.rows} />
+                <TableBody rows={props.rows} handleEdit={props.handleEdit}/>
               ) : (
                 <tbody className="table--loading_wrapper">
                   <Loader isLoading={true} />
