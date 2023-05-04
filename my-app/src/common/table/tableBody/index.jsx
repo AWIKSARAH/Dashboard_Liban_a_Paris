@@ -15,17 +15,21 @@ function TableBodyCom(props) {
       {rows.map((row, key) => (
         <TableRow
           key={row._id}
-          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          onClick={() => handleRowClick(row._id)}
-          style={{
+          sx={{
+            "&:last-child td, &:last-child th": { border: 0 },
             backgroundColor:
               key % 2 === 0 ? "var(--primary-derv)" : "var(--secondary)",
-              color:
-              key % 2 === 0 ? "var(--secondary)" : "black",
+            color: key % 2 === 0 ? "var(--secondary)!important" : "black",
           }}
+          onClick={() => handleRowClick(row._id)}
         >
           {Object.values(row).map((value, index) => (
-            <TableCell key={index} component="th" scope="row">
+            <TableCell
+              key={index}
+              component="th"
+              scope="row"
+              style={{ color: "inherit!important" }}
+            >
               {value.toString()}
             </TableCell>
           ))}
