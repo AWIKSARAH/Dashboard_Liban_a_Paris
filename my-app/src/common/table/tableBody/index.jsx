@@ -1,5 +1,5 @@
 import React from "react";
-import { TableBody, TableRow, TableCell } from "@mui/material";
+import { TableBody, TableRow, TableCell, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,24 +30,28 @@ function TableBodyCom(props) {
             </TableCell>
           ))}
           <TableCell>
-            <FontAwesomeIcon
-              icon={faEdit}
-              size="lg"
-              style={{
-                "--fa-primary-color": "red",
-                "--fa-secondary-color": "#10c14e",
-              }}
-            />
-          </TableCell>{" "}
-          <TableCell>
-            <FontAwesomeIcon
-              icon={faTrash}
-              size="lg"
-              style={{
-                "--fa-primary-color": "red",
-                "--fa-secondary-color": "#10c14e",
-              }}
-            />
+            <Button>
+              {" "}
+              <FontAwesomeIcon
+                icon={faEdit}
+                size="lg"
+                style={{
+                  "--fa-primary-color": "red",
+                  "--fa-secondary-color": "#10c14e",
+                }}
+              />
+            </Button>
+            <Button>
+              {" "}
+              <FontAwesomeIcon
+                icon={faTrash}
+                size="lg"
+                style={{
+                  "--fa-primary-color": "red",
+                  "--fa-secondary-color": "#10c14e",
+                }}
+              />
+            </Button>
           </TableCell>
         </TableRow>
       ))}

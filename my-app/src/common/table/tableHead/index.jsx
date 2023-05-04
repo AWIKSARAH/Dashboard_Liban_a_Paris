@@ -6,7 +6,11 @@ import TableRow from "@mui/material/TableRow";
 function tableHead(props) {
   return (
     <TableHead
-      style={{ backgroundColor: "var(--primary)", width: "100%", color: "white" }}
+      style={{
+        backgroundColor: "var(--primary)",
+        width: "100%",
+        color: "white",
+      }}
     >
       <TableRow width="100%">
         {props.cell.map((cell, key) => {
@@ -16,12 +20,8 @@ function tableHead(props) {
             </TableCell>
           );
         })}
-        <TableCell align="left" sx={{ color: "white" }}>
-          Edit{" "}
-        </TableCell>{" "}
-        <TableCell align="left" sx={{ color: "white" }}>
-          Delete{" "}
-        </TableCell>
+
+        <TableCell align="left">Action </TableCell>
       </TableRow>
     </TableHead>
   );
