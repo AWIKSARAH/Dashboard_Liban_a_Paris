@@ -58,6 +58,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
   });
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
+  const [imageObj, setImageObj] = useState("");
 
   useEffect(() => {
     const fetchPlace = async () => {
@@ -106,18 +107,28 @@ const handleCheckboxChange = (event) => {
 
 
   const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("place", imageObj);
+    try {
+        if(imageObj){
+        var uploadResponse = await axios.post(
+        "http://localhost:5000/api/files",
+        formData
+      );
+ 
+    
+    }
     const data = {
       title,
       email,
       description,
       socialMedia,
       tags,
-      //   image,
+        image:uploadResponse.data.image,
       location,
       schedule,
       confirmation:isChecked
     };
-    try {
       const response=await axios.put(
         `${process.env.REACT_APP_API_URL}/places/${placeId}`,
         data
@@ -206,7 +217,7 @@ const handleCheckboxChange = (event) => {
             />
             {/* <ImageUploader onImageUpload={setImage} /> */}
             {scheduleMapper()}
-            <ImageInput2 image={image} setImage={setImage} />
+            <ImageInput2 image={image} setImage={setImageObj}  />
             <MyCheckbox checked={isChecked} onChange={handleCheckboxChange} />
 
             
