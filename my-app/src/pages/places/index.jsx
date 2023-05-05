@@ -75,7 +75,7 @@ function PlacesPage() {
         setOnlyStringData(clean);
         setIsLoading(false);
       });
-  }, [currentPage, query, refresh]);
+  }, [currentPage, query, refresh,authHeader]);
   const handleConfirmationChange = (value, id) => {
     axios
       .patch(`${process.env.REACT_APP_API_URL}/places/confirm/${id}`, {

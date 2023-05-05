@@ -34,7 +34,7 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
         console.log(response)
         setTitle(response.data.data.title);
         setDescription(response.data.data.description);
-        setTags(response.data.data.tags.join(','));
+        setTags(response.data.data.tags?.join(','));
         setImage(response.data.data.image);
       } catch (error) {
         setError(error);
@@ -57,11 +57,11 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
           formData
         );
       }
-      const data = {
+      var data = {
         title,
         description,
-        tags:tags.split(",").trim(),
-        image: uploadResponse.data.image,
+        tags:tags.split(",").map(e=>e.trim()),
+        image: uploadResponse?.data.image,
       };
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/blog/${blogId}`,
@@ -121,7 +121,7 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
               label="Tags"
               type="text"
               fullWidth
-              value={tags.join(",")}
+              value={tags}
               onChange={(e) => setTags(e.target.value)}
             />
 
