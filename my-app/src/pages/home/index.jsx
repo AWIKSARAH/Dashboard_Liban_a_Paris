@@ -1,4 +1,5 @@
-import PageHeader from "../../components/pageHeader";
+ 
+  import PageHeader from "../../components/pageHeader";
 import SearchBar from "../../components/searchBar";
 import "./home.css";
 function HomePage() {

@@ -1,18 +1,11 @@
 import {
   Button,
-  Checkbox,
   CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  FormControl,
-  Input,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  Select,
   TextField,
 } from "@mui/material";
 import "./placeEdit.css";
@@ -24,7 +17,7 @@ import SocialMedia from "./socialMedia";
 // import { CheckBox } from "@mui/icons-material";
 import MyCheckbox from "./checkbox";
 import { toast } from "react-hot-toast";
-
+import { useAuthHeader } from "react-auth-kit";
 const days = [
   "monday",
   "tuesday",
@@ -36,7 +29,7 @@ const days = [
 ];
 // const socialMediaOptions = ["facebook", "twitter", "instagram", "linkedIn"];
 const EditPlaceDialog = ({ open, onClose, placeId }) => {
-//   const [place, setPlace] = useState(null);
+  //   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [title, setTitle] = useState("");
@@ -59,6 +52,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
   const [imageObj, setImageObj] = useState("");
+  const authHeader = useAuthHeader();
 
   useEffect(() => {
     const fetchPlace = async () => {
@@ -72,11 +66,11 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
         setTel(response.data.data.tel);
         setDescription(response.data.data.description);
         setSocialMedia(response.data.data.socialMedia);
-        setTags(response.data.data.tags);
+        setTags(response.data.data.tags?.join(","));
         setSchedule(response.data.data.schedule);
         setLocation(response.data.data.location);
-        setImage(response.data.data.image)
-        setIsChecked(response.data.data.confirmation)
+        setImage(response.data.data.image);
+        setIsChecked(response.data.data.confirmation);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -101,40 +95,40 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
   };
   const [isChecked, setIsChecked] = useState(false);
 
-const handleCheckboxChange = (event) => {
-  setIsChecked(event.target.checked);
-};
-
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
 
   const handleSave = async () => {
     const formData = new FormData();
     formData.append("place", imageObj);
     try {
-        if(imageObj){
+      if (imageObj) {
         var uploadResponse = await axios.post(
-        "http://localhost:5000/api/files",
-        formData
-      );
- 
-    
-    }
-    const data = {
-      title,
-      email,
-      description,
-      socialMedia,
-      tags,
-        image:uploadResponse?.data.image||image,
-      location,
-      schedule,
-      tel,
-      confirmation:isChecked
-    };
-      const response=await axios.put(
+          "http://localhost:5000/api/files",
+          formData,
+          { headers: { Authorization: authHeader() } }
+        );
+      }
+      const data = {
+        title,
+        email,
+        description,
+        socialMedia,
+        tags: tags.split(",").map((e) => e.trim()),
+        image: uploadResponse?.data.image || image,
+        location,
+        schedule,
+        tel,
+        confirmation: isChecked,
+      };
+      const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/places/${placeId}`,
-        data
+        data,
+        { headers: { Authorization: authHeader() } }
       );
-      response.data.success===true&&toast.success("Place Updated Successfully")
+      response.data.success === true &&
+        toast.success("Place Updated Successfully");
 
       onClose(true);
     } catch (error) {
@@ -196,17 +190,23 @@ const handleCheckboxChange = (event) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-             {socialMapper()}
-             <Button name="add-social-media" type="button" onClick={handleAddSocialMedia}>
-          Add Social Media
-        </Button>
+            {socialMapper()}
+            <Button
+              name="add-social-media"
+              type="button"
+              onClick={handleAddSocialMedia}
+            >
+              Add Social Media
+            </Button>
             <TextField
               margin="dense"
               label="Tags"
               type="text"
               fullWidth
-              value={tags.join(",")}
-              onChange={(e) => setTags(e.target.value.split(",").trim())}
+              value={tags}
+              onChange={(e) => {
+                setTags(e.target.value);
+              }}
             />
             <TextField
               margin="dense"
@@ -218,10 +218,9 @@ const handleCheckboxChange = (event) => {
             />
             {/* <ImageUploader onImageUpload={setImage} /> */}
             {scheduleMapper()}
-            <ImageInput2 image={image} setImage={setImageObj}  />
+            <ImageInput2 image={image} setImage={setImageObj} />
             <MyCheckbox checked={isChecked} onChange={handleCheckboxChange} />
 
-            
             {/* <ScheduleEditor schedule={schedule} onChange={setSchedule} /> */}
           </DialogContent>
           <DialogActions>
@@ -254,7 +253,8 @@ const handleCheckboxChange = (event) => {
         item={item}
         index={index}
       ></SocialMedia>
-    ));}
+    ));
+  }
 };
 
 export default EditPlaceDialog;

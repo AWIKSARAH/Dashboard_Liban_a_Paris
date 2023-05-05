@@ -5,9 +5,11 @@ import TableContent from "../../common/table";
 // import { Loader } from "../../components/loader";
 import EditPlaceDialog from "./placeEdit";
 import { toast } from "react-hot-toast";
+import { useAuthHeader } from "react-auth-kit";
 
 function PlacesPage() {
-  const [data, setData] = useState(null);
+    const authHeader=useAuthHeader()
+    const [data, setData] = useState(null);
   const [query, setQuery] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [onlyStringData, setOnlyStringData] = useState([]);
@@ -41,7 +43,7 @@ function PlacesPage() {
     setIsLoading(true);
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/places/all/all?page=${currentPage}&title=${query}`
+        `${process.env.REACT_APP_API_URL}/places/all/all?page=${currentPage}&title=${query}`,{headers:{Authorization:authHeader()}}
       )
       .then((response) => {
         let clean = response.data.docs
@@ -78,7 +80,7 @@ function PlacesPage() {
     axios
       .patch(`${process.env.REACT_APP_API_URL}/places/confirm/${id}`, {
         confirmation: value,
-      })
+      },{headers:{Authorization:authHeader()}})
       .then((response) => {
         response.data.success && toast.success("Confirmation Updated!");
       })
@@ -87,6 +89,7 @@ function PlacesPage() {
   return (
     <>
       <PageHeader label="Places" setSearchQuery={setQuery} />
+      
       <TableContent
         rows={onlyStringData}
         columns={columns}
