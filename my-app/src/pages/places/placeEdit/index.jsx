@@ -19,6 +19,11 @@ import "./placeEdit.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ScheduleDay from "./day";
+import ImageInput2 from "./imageInput";
+import SocialMedia from "./socialMedia";
+// import { CheckBox } from "@mui/icons-material";
+import MyCheckbox from "./checkbox";
+import { toast } from "react-hot-toast";
 
 const days = [
   "monday",
@@ -29,9 +34,9 @@ const days = [
   "saturday",
   "sunday",
 ];
-const socialMediaOptions = ["facebook", "twitter", "instagram", "linkedIn"];
+// const socialMediaOptions = ["facebook", "twitter", "instagram", "linkedIn"];
 const EditPlaceDialog = ({ open, onClose, placeId }) => {
-  const [place, setPlace] = useState(null);
+//   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [title, setTitle] = useState("");
@@ -52,7 +57,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
     sunday: { status: "closed", fromTo: "" },
   });
   const [location, setLocation] = useState("");
-  // const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const fetchPlace = async () => {
@@ -60,7 +65,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/places/${placeId}`
         );
-        setPlace(response.data.data);
+        // setPlace(response.data.data);
         setTitle(response.data.data.title);
         setEmail(response.data.data.email);
         setTel(response.data.data.tel);
@@ -69,6 +74,8 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
         setTags(response.data.data.tags);
         setSchedule(response.data.data.schedule);
         setLocation(response.data.data.location);
+        setImage(response.data.data.image)
+        setIsChecked(response.data.data.confirmation)
       } catch (error) {
         setError(error.message);
       } finally {
@@ -88,9 +95,15 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
     setSocialMedia(list);
   };
 
-  // const handleAddSocialMedia = () => {
-  //   setSocialMedia([...socialMedia, { name: "", url: "" }]);
-  // };
+  const handleAddSocialMedia = () => {
+    setSocialMedia([...socialMedia, { name: "", url: "" }]);
+  };
+  const [isChecked, setIsChecked] = useState(false);
+
+const handleCheckboxChange = (event) => {
+  setIsChecked(event.target.checked);
+};
+
 
   const handleSave = async () => {
     const data = {
@@ -99,20 +112,29 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       description,
       socialMedia,
       tags,
-      // image,
+      //   image,
       location,
       schedule,
+      confirmation:isChecked
     };
     try {
-      await axios
-        .put(`${process.env.REACT_APP_API_URL}/places/${placeId}`, data)
+      const response=await axios.put(
+        `${process.env.REACT_APP_API_URL}/places/${placeId}`,
+        data
+      );
+      response.data.success===true&&toast.success("Place Updated Successfully")
+
       onClose(true);
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <Dialog open={open} onClose={(e)=>onClose(false)} aria-labelledby="form-dialog-title">
+    <Dialog
+      open={open}
+      onClose={(e) => onClose(false)}
+      aria-labelledby="form-dialog-title"
+    >
       <DialogTitle id="form-dialog-title">Edit Place</DialogTitle>
       {loading ? (
         <DialogContent>
@@ -144,7 +166,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-             <TextField
+            <TextField
               margin="dense"
               label="Tel"
               type="text"
@@ -162,40 +184,10 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <FormControl fullWidth margin="dense">
-              <InputLabel htmlFor="social-media">Social Media</InputLabel>
-              <Select
-                multiple
-                value={socialMedia}
-                onChange={(e) => setSocialMedia(e.target.value)}
-                input={<Input id="social-media" />}
-                renderValue={(selected) =>
-                  selected.map((item) => item.name + ": " + item.url).join(", ")
-                }
-              >
-                {socialMediaOptions.map((option) => (
-                  <MenuItem key={option.name} value={option}>
-                    <Checkbox
-                      checked={socialMedia.some(
-                        (item) => item.name === option.name
-                      )}
-                    />
-                    <ListItemText primary={option.name} />
-                    <TextField
-                      margin="dense"
-                      type="url"
-                      value={
-                        socialMedia.find((item) => item.name === option.name)
-                          ?.url || ""
-                      }
-                      onChange={(e) =>
-                        handleSocialMediaChange(socialMedia.indexOf(option), e)
-                      }
-                    />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+             {socialMapper()}
+             <Button name="add-social-media" type="button" onClick={handleAddSocialMedia}>
+          Add Social Media
+        </Button>
             <TextField
               margin="dense"
               label="Tags"
@@ -213,11 +205,15 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               onChange={(e) => setLocation(e.target.value)}
             />
             {/* <ImageUploader onImageUpload={setImage} /> */}
-        {scheduleMapper()}
+            {scheduleMapper()}
+            <ImageInput2 image={image} setImage={setImage} />
+            <MyCheckbox checked={isChecked} onChange={handleCheckboxChange} />
+
+            
             {/* <ScheduleEditor schedule={schedule} onChange={setSchedule} /> */}
           </DialogContent>
           <DialogActions>
-            <Button onClick={(e)=>onClose()} color="primary">
+            <Button onClick={(e) => onClose()} color="primary">
               Cancel
             </Button>
             <Button onClick={handleSave} color="primary">
@@ -238,6 +234,15 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       />
     ));
   }
+  function socialMapper() {
+    return socialMedia.map((item, index) => (
+      <SocialMedia
+        key={index}
+        handleSocialMediaChange={handleSocialMediaChange}
+        item={item}
+        index={index}
+      ></SocialMedia>
+    ));}
 };
 
 export default EditPlaceDialog;

@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PageHeader from "../../components/pageHeader";
 import TableContent from "../../common/table";
-import { Loader } from "../../components/loader";
+// import { Loader } from "../../components/loader";
 import EditPlaceDialog from "./placeEdit";
+import { toast } from "react-hot-toast";
 
 function PlacesPage() {
   const [data, setData] = useState(null);
@@ -72,6 +73,16 @@ function PlacesPage() {
         setIsLoading(false);
       });
   }, [currentPage, query, refresh]);
+  const handleConfirmationChange = (value, id) => {
+    axios
+      .patch(`${process.env.REACT_APP_API_URL}/places/confirm/${id}`, {
+        confirmation: value,
+      })
+      .then((response) => {
+        response.data.success && toast.success("Confirmation Updated!");
+      })
+      .catch((e) => toast.error("Something went wrong"));
+  };
   return (
     <>
       <PageHeader label="Places" setSearchQuery={setQuery} />
@@ -83,6 +94,7 @@ function PlacesPage() {
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
         handleEdit={handleEdit}
+        handleConfirmationChange={handleConfirmationChange}
       />
       <EditPlaceDialog
         open={openEdit}

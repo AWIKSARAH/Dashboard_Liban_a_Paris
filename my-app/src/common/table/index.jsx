@@ -4,7 +4,7 @@ import {
   Table,
   TableContainer,
   Pagination,
-  TableFooter,
+  // TableFooter,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
@@ -30,7 +30,7 @@ function TableContent(props) {
             <Table sx={{ minWidth: "100%" }}>
               <TableHead cell={props.columns} />
               {!props.isLoading ? (
-                <TableBody rows={props.rows} handleEdit={props.handleEdit}/>
+                <TableBody rows={props.rows} handleEdit={props.handleEdit} handleConfirmationChange={props.handleConfirmationChange}/>
               ) : (
                 <tbody className="table--loading_wrapper">
                   <Loader isLoading={true} />

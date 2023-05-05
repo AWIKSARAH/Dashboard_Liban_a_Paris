@@ -18,9 +18,12 @@
     "react-auth-kit": "^2.12.2",
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.2",
+    "styled-components": "^5.3.10",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },

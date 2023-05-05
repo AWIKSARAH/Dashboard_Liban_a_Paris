@@ -1,14 +1,17 @@
 import React from "react";
-import { TableBody, TableRow, TableCell, Button } from "@mui/material";
+import {
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+  // Checkbox,
+  Switch,
+} from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function TableBodyCom(props) {
   const rows = props.rows.map((cells) => ({ ...cells }));
-
-  const handleRowClick = (id) => {
-    alert(id);
-  };
 
   return (
     <TableBody>
@@ -27,16 +30,26 @@ function TableBodyCom(props) {
               key={index}
               component="th"
               scope="row"
-              style={{ color: "inherit!important" }}
+              style={{
+                color: "inherit!important",
+                padding: typeof value === "boolean" && "0",
+                textAlign: typeof value === "boolean" && "center",
+              }}
             >
-              {value.toString()}
+              {typeof value === "boolean" ? (
+                <Switch
+                  defaultChecked={value}
+                  onChange={(e) =>
+                    props.handleConfirmationChange(e.target.checked, row._id)
+                  }
+                />
+              ) : (
+                value
+              )}
             </TableCell>
           ))}
           <TableCell>
-            <Button
-          onClick={() => props.handleEdit(row._id)}
-            
-            >
+            <Button onClick={() => props.handleEdit(row._id)}>
               {" "}
               <FontAwesomeIcon
                 icon={faEdit}

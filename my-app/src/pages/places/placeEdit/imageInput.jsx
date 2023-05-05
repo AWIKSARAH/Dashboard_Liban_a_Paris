@@ -25,7 +25,7 @@ import styled from "styled-components";
     `;
     
     const ImageInput2 = (props) => {
-      const [image, setImage] = useState(null);
+      const [image, setImage] = useState("");
       
       const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -49,11 +49,9 @@ import styled from "styled-components";
           onChange={handleImageChange}
         />
         <ImageLabel htmlFor="image">
-          {image ? (
-            <PreviewImage src={image} alt="Preview" />
-          ) : (
-              <span>Upload an image</span>
-              )}
+            <PreviewImage src={image?image:`http://localhost:5000${props.image}`} alt="Preview" />
+            
+       
         </ImageLabel>
               </>
     );
