@@ -25,7 +25,7 @@ function TableBodyCom(props) {
             color: key % 2 === 0 ? "var(--secondary)!important" : "black",
           }}
         >
-          {Object.values(row).map((value, index) => (
+          {props.columns.map((column, index) => (
             <TableCell
               key={index}
               component="th"
@@ -36,15 +36,15 @@ function TableBodyCom(props) {
                 textAlign: typeof value === "boolean" && "center",
               }}
             >
-              {typeof value === "boolean" ? (
+              { column.access === "confirmation" ? (
                 <Switch
-                  defaultChecked={value}
+                  defaultChecked={row[column.access]}
                   onChange={(e) =>
                     props.handleConfirmationChange(e.target.checked, row._id)
                   }
                 />
               ) : (
-                value
+                row[column.access]
               )}
             </TableCell>
           ))}

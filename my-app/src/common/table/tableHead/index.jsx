@@ -13,7 +13,7 @@ function tableHead(props) {
       }}
     >
       <TableRow width="100%">
-        {props.cell.map((cell, key) => {
+        {props.columns.map((column, key) => {
           return (
             <TableCell
             key={key}
@@ -21,7 +21,7 @@ function tableHead(props) {
               id={key}
               sx={{ color: "white"}}
             >
-              {cell}
+              {column.label}
             </TableCell>
           );
         })}

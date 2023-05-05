@@ -4,16 +4,13 @@ import {
   Table,
   TableContainer,
   Pagination,
-  // TableFooter,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
 import TableBody from "./tableBody";
-// import { CSVLink } from "react-csv";
 import { Loader } from "../../components/loader";
 
 function TableContent(props) {
-  // const rows = props.rows.map((cells) => ({ ...cells }));
 
   const handlePageChange = (event, value) => {
     props.setCurrentPage(value);
@@ -22,30 +19,20 @@ function TableContent(props) {
   return (
     <Box sx={{ overflow: "auto" }}>
       <Box sx={{ width: "100%" }}>
-        {/* <Box sx={{ display: "flex", justifyContent: "space-between" }}> */}
           <TableContainer
             component={Paper}
             sx={{ overflow: "auto", borderRadius: "0" }}
           >
             <Table sx={{ minWidth: "100%" }}>
-              <TableHead cell={props.columns} />
+              <TableHead columns={props.columns} />
               {!props.isLoading ? (
-                <TableBody rows={props.rows} handleEdit={props.handleEdit} handleConfirmationChange={props.handleConfirmationChange}/>
+                <TableBody rows={props.rows} columns={props.columns} handleEdit={props.handleEdit} handleConfirmationChange={props.handleConfirmationChange}/>
               ) : (
                 <tbody className="table--loading_wrapper">
                   <Loader isLoading={true} />
                 </tbody>
               )}
             </Table>
-            {/* <CSVLink
-              data={rows}
-              headers={props.cells}
-              filename={`${props.title}.csv`}
-            >
-              <Button color="success" variant="contained">
-                Export to CSV
-              </Button>
-            </CSVLink> */}
           </TableContainer>
             <div className="gg">
 
@@ -59,7 +46,6 @@ function TableContent(props) {
             onChange={handlePageChange}
           />
             </div>
-        {/* </Box> */}
       </Box>
     </Box>
   );

@@ -16,15 +16,16 @@ function PlacesPage() {
   const [editId, setEditId] = useState("");
   const [refresh, setRefresh] = useState(false);
   const columns = [
-    "_id",
-    "Title",
-    "Email",
-    "Description",
-    "Location",
-    "Type",
-    "Tel",
-    "Confirmation",
+    { label: "_id", access: "_id" },
+    { label: "Title", access: "title" },
+    { label: "Email", access: "email" },
+    { label: "Description", access: "description" },
+    { label: "Location", access: "location" },
+    { label: "Type", access: "placeType" },
+    { label: "Tel", access: "tel" },
+    { label: "Confirmation", access: "confirmation" },
   ];
+  
   const handleEdit = (id) => {
     setEditId(id);
     setOpenEdit(true);

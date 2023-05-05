@@ -2,6 +2,7 @@ import { Home } from "@mui/icons-material";
 import HomePage from "../../pages/home";
 import Table from "../table";
 import PlacesPage from "../../pages/places";
+import BlogPage from "../../pages/blog";
 
 export const rows = [
   {
@@ -165,7 +166,12 @@ export const routes = [
       <PlacesPage/>
     ),
   },
-  { path: "/3", label: "Menu Item 3", icon: <Home />, element: <HomePage /> },
+  {  path: "/blog",
+  label: "Blog",
+  icon: <Home />,
+  element: (
+    <BlogPage/>
+  ), },
   { path: "/4", label: "Menu Item 4", icon: <Home />, element: <HomePage /> },
   { path: "/5", label: "Menu Item 5", icon: <Home />, element: <HomePage /> },
   { path: "/6", label: "Menu Item 6", icon: <Home />, element: <HomePage /> },
