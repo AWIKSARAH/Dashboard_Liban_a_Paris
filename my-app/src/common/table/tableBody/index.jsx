@@ -36,7 +36,7 @@ function TableBodyCom(props) {
                 textAlign: typeof value === "boolean" && "center",
               }}
             >
-              { column.access === "confirmation" ? (
+              { column.Label === "Confirmation" ? (
                 <Switch
                   defaultChecked={row[column.access]}
                   onChange={(e) =>
