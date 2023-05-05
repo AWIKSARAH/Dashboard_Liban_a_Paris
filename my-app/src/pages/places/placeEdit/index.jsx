@@ -124,9 +124,10 @@ const handleCheckboxChange = (event) => {
       description,
       socialMedia,
       tags,
-        image:uploadResponse.data.image,
+        image:uploadResponse?.data.image||image,
       location,
       schedule,
+      tel,
       confirmation:isChecked
     };
       const response=await axios.put(

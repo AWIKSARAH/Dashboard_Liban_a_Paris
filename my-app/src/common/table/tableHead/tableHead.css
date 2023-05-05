@@ -38,5 +38,9 @@
     height: 772px;
 }
 .css-1ex1afd-MuiTableCell-root{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 350px;
     color:inherit!important
 }
