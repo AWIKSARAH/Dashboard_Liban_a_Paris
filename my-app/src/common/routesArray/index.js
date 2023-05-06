@@ -3,7 +3,7 @@ import HomePage from "../../pages/home";
 import Table from "../table";
 import PlacesPage from "../../pages/places";
 import BlogPage from "../../pages/blog";
-
+import User from '../../pages/user'
 export const rows = [
   {
     _id: "41",
@@ -162,17 +162,10 @@ export const routes = [
     path: "/places",
     label: "Places",
     icon: <Home />,
-    element: (
-      <PlacesPage/>
-    ),
+    element: <PlacesPage />,
   },
-  {  path: "/blog",
-  label: "Blog",
-  icon: <Home />,
-  element: (
-    <BlogPage/>
-  ), },
+  { path: "/blog", label: "Blog", icon: <Home />, element: <BlogPage /> },
   { path: "/4", label: "Menu Item 4", icon: <Home />, element: <HomePage /> },
   { path: "/5", label: "Menu Item 5", icon: <Home />, element: <HomePage /> },
-  { path: "/6", label: "Menu Item 6", icon: <Home />, element: <HomePage /> },
+  { path: "/user", label: "Menu Item 6", icon: <Home />, element: <User /> },
 ];

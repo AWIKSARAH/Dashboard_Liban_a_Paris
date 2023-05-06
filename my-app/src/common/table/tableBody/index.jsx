@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function TableBodyCom(props) {
-  const rows = props.rows.map((cells) => ({ ...cells }));
-
+  const rows = props.rows.map((cells) => ({ ...cells  } ));
   return (
     <TableBody>
       {rows.map((row, key) => (
@@ -36,7 +35,8 @@ function TableBodyCom(props) {
                 textAlign: typeof value === "boolean" && "center",
               }}
             >
-              { column.access === "confirmation" ? (
+              {console.log("active"+row[column.access])}
+              {column.access === "IsAdmin" ? (
                 <Switch
                   defaultChecked={row[column.access]}
                   onChange={(e) =>
