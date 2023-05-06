@@ -8,10 +8,9 @@
     overflow-y: scroll;
 }
 .dash--main_content{
-    width: calc(100% - 300px);
+    width: calc(100% - 298px);
     margin-left: 280px;
     margin-right: 20px;
-    padding: 0 24px;
 }
 
 @media (max-width: 767px) {

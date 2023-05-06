@@ -32,17 +32,19 @@ function TableBodyCom(props) {
               scope="row"
               style={{
                 color: "inherit!important",
-                padding: typeof value === "boolean" && "0",
-                textAlign: typeof value === "boolean" && "center",
+                padding: column.type === "boolean" && "0",
+                textAlign: column.type === "boolean" && "center",
               }}
             >
-              { column.Label === "Confirmation" ? (
+              {column.type === "boolean" ? (
                 <Switch
                   defaultChecked={row[column.access]}
                   onChange={(e) =>
                     props.handleConfirmationChange(e.target.checked, row._id)
                   }
                 />
+              ) : column.type === "array" ? (
+                row[column.access].join(", ")
               ) : (
                 row[column.access]
               )}

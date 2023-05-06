@@ -25,11 +25,11 @@ function TableContent(props) {
           >
             <Table sx={{ minWidth: "100%" }}>
               <TableHead columns={props.columns} />
-              {!props.isLoading ? (
+              {!props.isLoading&&!props.error ? (
                 <TableBody rows={props.rows} columns={props.columns} handleEdit={props.handleEdit} handleConfirmationChange={props.handleConfirmationChange}/>
               ) : (
                 <tbody className="table--loading_wrapper">
-                  <Loader isLoading={true} />
+                  {props.isLoading?<Loader isLoading={true} />:props.error}
                 </tbody>
               )}
             </Table>

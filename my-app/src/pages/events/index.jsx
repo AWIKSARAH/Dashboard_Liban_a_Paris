@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import PageHeader from "../../components/pageHeader";
 import TableContent from "../../common/table";
 // import { Loader } from "../../components/loader";
-import EditPlaceDialog from "./placeEdit";
+import EditEventDialog from "./eventEdit";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 
-function PlacesPage() {
-    const authHeader=useAuthHeader()
-    const [data, setData] = useState(null);
+function EventsPage() {
+  const [data, setData] = useState(null);
   const [query, setQuery] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [onlyStringData, setOnlyStringData] = useState([]);
@@ -17,17 +16,31 @@ function PlacesPage() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editId, setEditId] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [ error,setError]= useState(false);
   const columns = [
     { label: "_id", access: "_id" },
     { label: "Title", access: "title" },
-    { label: "Email", access: "email" },
+    { label: "Category", access: "category" },
     { label: "Description", access: "description" },
     { label: "Location", access: "location" },
-    { label: "Type", access: "placeType" },
+    { label: "Type", access: "type" },
     { label: "Tel", access: "tel" },
-    { label: "Tags", access: "tags" ,type:"array"},
+    { label: "Tags", access: "tags",type:"array" },
+    { label: "Image", access: "image" },
+    { label: "Start Date", access: "start_date" },
+    { label: "End Date", access: "end_date" },
     { label: "Confirmation", access: "confirmation",type:"boolean" },
   ];
+  function cleanAndConvertToStrings(data) {
+    const cleanedData = {};
+    for (const key in data) {
+      if (typeof data[key] !== "undefined"||typeof data[key] !== "boolean") {
+        cleanedData[key] = String(data[key]);
+      }
+    }
+    return cleanedData;
+  }
+  
   
   const handleEdit = (id) => {
     setEditId(id);
@@ -40,25 +53,29 @@ function PlacesPage() {
       setRefresh(!refresh);
     }
   };
+  const authHeader=useAuthHeader()
   useEffect(() => {
+    console.log(query)
     setIsLoading(true);
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/places/all/all?page=${currentPage}&title=${query}`,{headers:{Authorization:authHeader()}}
+    .get(
+        `${process.env.REACT_APP_API_URL}/events/all/all?page=${currentPage}&q=${query}`,{headers:{Authorization:authHeader()}}
       )
       .then((response) => {
-       
-       
-       
         setData(response.data);
-        setOnlyStringData(response.data.docs);
+        setOnlyStringData(response.data.data.docs);
         setIsLoading(false);
+      }).catch(e=>{
+        console.log(e)
+      setIsLoading(false);
+      setError(e.response.status===404?e.response.data.message:e.message)
+
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, query, refresh]);
+  }, [ currentPage, query, refresh]);
   const handleConfirmationChange = (value, id) => {
     axios
-      .patch(`${process.env.REACT_APP_API_URL}/places/confirm/${id}`, {
+      .patch(`${process.env.REACT_APP_API_URL}/events/confirm/${id}`, {
         confirmation: value,
       },{headers:{Authorization:authHeader()}})
       .then((response) => {
@@ -68,7 +85,7 @@ function PlacesPage() {
   };
   return (
     <>
-      <PageHeader label="Places" setSearchQuery={setQuery} />
+      <PageHeader label="Events" setSearchQuery={setQuery} />
       
       <TableContent
         rows={onlyStringData}
@@ -77,16 +94,17 @@ function PlacesPage() {
         setCurrentPage={setCurrentPage}
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
+        error={error}
         handleEdit={handleEdit}
         handleConfirmationChange={handleConfirmationChange}
       />
-      <EditPlaceDialog
+      <EditEventDialog
         open={openEdit}
         onClose={handleEditClose}
-        placeId={editId}
+        eventId={editId}
       />
     </>
   );
 }
 
-export default PlacesPage;
+export default EventsPage;

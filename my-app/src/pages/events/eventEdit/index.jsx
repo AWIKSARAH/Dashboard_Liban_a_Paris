@@ -8,69 +8,56 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import "./placeEdit.css";
+import "./eventEdit.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ScheduleDay from "./day";
 import ImageInput2 from "./imageInput";
 import SocialMedia from "./socialMedia";
-// import { CheckBox } from "@mui/icons-material";
 import MyCheckbox from "./checkbox";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
-const days = [
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
-];
-// const socialMediaOptions = ["facebook", "twitter", "instagram", "linkedIn"];
-const EditPlaceDialog = ({ open, onClose, placeId }) => {
-  //   const [place, setPlace] = useState(null);
+import CategorySelect from "./categorySelect";
+
+
+const EditEventDialog = ({ open, onClose, eventId }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [description, setDescription] = useState("");
+  const [website, setWebsite] = useState("");
   const [socialMedia, setSocialMedia] = useState([
     { name: "facebook", url: "" },
   ]);
   const [tags, setTags] = useState("");
-  const [schedule, setSchedule] = useState({
-    monday: { status: "closed", fromTo: "" },
-    tuesday: { status: "closed", fromTo: "" },
-    wednesday: { status: "closed", fromTo: "" },
-    thursday: { status: "closed", fromTo: "" },
-    friday: { status: "closed", fromTo: "" },
-    saturday: { status: "closed", fromTo: "" },
-    sunday: { status: "closed", fromTo: "" },
-  });
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
   const [imageObj, setImageObj] = useState("");
   const authHeader = useAuthHeader();
-
   useEffect(() => {
-    const fetchPlace = async () => {
+    const fetchEvent = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/places/${placeId}`
+          `${process.env.REACT_APP_API_URL}/events/${eventId}`
         );
-        // setPlace(response.data.data);
+        // setEvent(response.data.data);
         setTitle(response.data.data.title);
         setEmail(response.data.data.email);
+        setWebsite(response.data.data.website);
         setTel(response.data.data.tel);
         setDescription(response.data.data.description);
+        setStartDate(response.data.data.start_date)
+        setEndDate(response.data.data.end_date)
         setSocialMedia(response.data.data.socialMedia);
         setTags(response.data.data.tags?.join(","));
-        setSchedule(response.data.data.schedule);
         setLocation(response.data.data.location);
         setImage(response.data.data.image);
         setIsChecked(response.data.data.confirmation);
+        setCategory(response.data.data.category);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -78,9 +65,9 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       }
     };
     if (open) {
-      fetchPlace();
+      fetchEvent();
     }
-  }, [open, placeId]);
+  }, [open, eventId]);
 
   const handleSocialMediaChange = (index, event) => {
     const { name, value } = event.target;
@@ -101,11 +88,11 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
 
   const handleSave = async () => {
     const formData = new FormData();
-    formData.append("place", imageObj);
+    formData.append("event", imageObj);
     try {
       if (imageObj) {
         var uploadResponse = await axios.post(
-          "http://localhost:5000/api/files/places",
+          "http://localhost:5000/api/files/event",
           formData,
           { headers: { Authorization: authHeader() } }
         );
@@ -118,21 +105,20 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
         tags: tags.split(",").map((e) => e.trim()),
         image: uploadResponse?.data.image || image,
         location,
-        schedule,
         tel,
         confirmation: isChecked,
       };
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/places/${placeId}`,
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/events/${eventId}`,
         data,
         { headers: { Authorization: authHeader() } }
       );
       response.data.success === true &&
-        toast.success("Place Updated Successfully");
+        toast.success("Event Updated Successfully");
 
       onClose(true);
     } catch (error) {
-      console.log(error);
+      toast.log(error.message);
     }
   };
   return (
@@ -141,7 +127,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       onClose={(e) => onClose(false)}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Edit Place</DialogTitle>
+      <DialogTitle id="form-dialog-title">Edit Event</DialogTitle>
       {loading ? (
         <DialogContent>
           <CircularProgress />
@@ -153,15 +139,26 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       ) : (
         <>
           <DialogContent>
-            <TextField
+          <TextField
               autoFocus
               margin="dense"
               label="Title"
               type="text"
               fullWidth
-              value={title}
+              defaultValue={title}
               onChange={(e) => {
                 setTitle(e.target.value);
+              }}
+            />
+             <TextField
+              autoFocus
+              margin="dense"
+              label="Website"
+              type="text"
+              fullWidth
+              defaultValue={website}
+              onChange={(e) => {
+                setWebsite(e.target.value);
               }}
             />
             <TextField
@@ -169,7 +166,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               label="Email"
               type="email"
               fullWidth
-              value={email}
+              defaultValue={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
@@ -177,9 +174,27 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               label="Tel"
               type="text"
               fullWidth
-              value={tel}
+              defaultValue={tel}
               onChange={(e) => setTel(e.target.value)}
             />
+              <TextField
+                margin="dense"
+                label="Start Date"
+                type="date"
+                fullWidth
+                multiline
+                defaultValue={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+                  <TextField
+                margin="dense"
+                label="End Date"
+                type="date"
+                fullWidth
+                multiline
+                defaultValue={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             <TextField
               margin="dense"
               label="Description"
@@ -187,7 +202,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               fullWidth
               multiline
               rows={4}
-              value={description}
+              defaultValue={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             {socialMapper()}
@@ -203,21 +218,21 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               label="Tags"
               type="text"
               fullWidth
-              value={tags}
+              defaultValue={tags}
               onChange={(e) => {
                 setTags(e.target.value);
               }}
             />
+            <CategorySelect category={category} setCategory={setCategory}/>
             <TextField
               margin="dense"
               label="Location"
               type="text"
               fullWidth
-              value={location}
+              defaultValue={location}
               onChange={(e) => setLocation(e.target.value)}
             />
             {/* <ImageUploader onImageUpload={setImage} /> */}
-            {scheduleMapper()}
             <ImageInput2 image={image} setImage={setImageObj} />
             <MyCheckbox checked={isChecked} onChange={handleCheckboxChange} />
 
@@ -235,16 +250,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       )}
     </Dialog>
   );
-  function scheduleMapper() {
-    return days.map((day) => (
-      <ScheduleDay
-        day={day}
-        key={day}
-        schedule={schedule}
-        setSchedule={setSchedule}
-      />
-    ));
-  }
+
   function socialMapper() {
     return socialMedia.map((item, index) => (
       <SocialMedia
@@ -257,4 +263,4 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
   }
 };
 
-export default EditPlaceDialog;
+export default EditEventDialog;
