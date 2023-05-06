@@ -28,5 +28,5 @@ export const routes = [
   },
   { path: "/4", label: "Menu Item 4", icon: <Home />, element: <HomePage /> },
   { path: "/5", label: "Menu Item 5", icon: <Home />, element: <HomePage /> },
-  { path: "/6", label: "Menu Item 6", icon: <Home />, element: <HomePage /> },
+  { path: "/user", label: "Menu Item 6", icon: <Home />, element: <User /> },
 ];

@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function TableBodyCom(props) {
-  const rows = props.rows.map((cells) => ({ ...cells }));
-
+  const rows = props.rows.map((cells) => ({ ...cells  } ));
   return (
     <TableBody>
       {rows.map((row, key) => (
