@@ -55,7 +55,6 @@ function EventsPage() {
   };
   const authHeader=useAuthHeader()
   useEffect(() => {
-    console.log(query)
     setIsLoading(true);
     axios
     .get(
