@@ -14,7 +14,7 @@ function BlogPage() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editId, setEditId] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const columns = [{label:"_id",access:"_id"}, {label:"Title",access:"title"}, {label:"Description",access:"description"}, {label:"image",access:"image"}, {label:"tags",access:"tags"}];
+  const columns = [{label:"_id",access:"_id"}, {label:"Title",access:"title"}, {label:"Description",access:"description"}, {label:"image",access:"image"}, {label:"tags",access:"tags",type:"array"}];
   const handleEdit = (id) => {
     setEditId(id);
     setOpenEdit(true);

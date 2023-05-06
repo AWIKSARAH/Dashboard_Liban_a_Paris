@@ -53,7 +53,7 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
     try {
       if (imageObj) {
         var uploadResponse = await axios.post(
-          "http://localhost:5000/api/files",
+          "http://localhost:5000/api/files/blog",
           formData
         );
       }
