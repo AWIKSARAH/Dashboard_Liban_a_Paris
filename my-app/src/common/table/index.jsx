@@ -24,6 +24,7 @@ function TableContent(props) {
                 rows={props.rows}
                 columns={props.columns}
                 handleEdit={props.handleEdit}
+                handleDelete={props.handleDelete}
                 handleConfirmationChange={props.handleConfirmationChange}
               />
             ) : (

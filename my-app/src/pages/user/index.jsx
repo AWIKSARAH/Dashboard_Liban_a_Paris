@@ -7,9 +7,9 @@ import EditPlaceDialog from "./userEdit";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
 
-function PlacesPage() {
-    const authHeader=useAuthHeader()
-    const [data, setData] = useState(null);
+function UsersPage() {
+  const authHeader = useAuthHeader();
+  const [data, setData] = useState(null);
   const [query, setQuery] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [onlyStringData, setOnlyStringData] = useState([]);
@@ -21,10 +21,10 @@ function PlacesPage() {
     { label: "_id", access: "_id" },
     { label: "name", access: "name" },
     { label: "Email", access: "email" },
-    { label: "IsAdmin", access: "IsAdmin" },
+    { label: "IsAdmin", access: "IsAdmin", type: "boolean" },
     { label: "Password", access: "password" },
   ];
-  
+
   const handleEdit = (id) => {
     setEditId(id);
     setOpenEdit(true);
@@ -36,58 +36,61 @@ function PlacesPage() {
       setRefresh(!refresh);
     }
   };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      axios
+        .delete(
+          `${process.env.REACT_APP_API_URL}/user/${id}`,
+          { headers: { Authorization: authHeader() } }
+        )
+        .then((response) => {
+          response.data.success && toast.success("Confirmation Delete!");
+          setRefresh(!refresh);
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error("Ooops --Something went wrong during the Delete!");
+        });
+    }
+  };
+  
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/user/`,{headers:{Authorization:authHeader()}}
-      )
+      .get(`${process.env.REACT_APP_API_URL}/user`, {
+        headers: { Authorization: authHeader() },
+      })
       .then((response) => {
+        setData(response.data.message);
+        setOnlyStringData(response.data.message.docs);
         console.log(response);
-        let clean = response.data.message.docs
-          .filter((obj) => {
-            for (let key in obj) {
-              if (typeof obj[key] === "string") {
-                return true;
-              }
-              if (typeof obj[key] === "boolean") {
-                return true;
-              }
-            }
-            return false;
-          })
-          .map((obj) => {
-            const newObj = {};
-            for (let key in obj) {
-              if (typeof obj[key] === "string" && key !== "image") {
-                newObj[key] = obj[key];
-              }
-            }
-            newObj.confirmation = obj.confirmation;
-            return newObj;
-          });
-        response.data.message.docs.forEach((element) => {
-          clean.confirmation = element.confirmation;
-        });
-        setData(response.data);
-        setOnlyStringData(clean);
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, query, refresh]);
   const handleConfirmationChange = (value, id) => {
+    console.log("value: " + value + "id: " + id);
     axios
-      .patch(`${process.env.REACT_APP_API_URL}/user/conf/${id}`, {
-      },{headers:{Authorization:authHeader()}})
+      .patch(
+        `${process.env.REACT_APP_API_URL}/user/conf/${id}`,
+        {
+          IsAdmin: value,
+        },
+        { headers: { Authorization: authHeader() } }
+      )
       .then((response) => {
-        alert('j')
         response.data.success && toast.success("Confirmation Updated!");
       })
-      .catch((e) => toast.error("Something went wrong"));
+      .catch((e) => {
+        console.log(e);
+        toast.error("Something went wrong");
+      });
   };
   return (
     <>
-      <PageHeader label="Places" setSearchQuery={setQuery} />
-      
+      <PageHeader label="Users" setSearchQuery={setQuery} />
+
       <TableContent
         rows={onlyStringData}
         columns={columns}
@@ -96,15 +99,16 @@ function PlacesPage() {
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
         handleEdit={handleEdit}
+        handleDelete={handleDelete}
         handleConfirmationChange={handleConfirmationChange}
       />
       <EditPlaceDialog
         open={openEdit}
         onClose={handleEditClose}
-        placeId={editId}
+        UserId={editId}
       />
     </>
   );
 }
 
-export default PlacesPage;
+export default UsersPage;

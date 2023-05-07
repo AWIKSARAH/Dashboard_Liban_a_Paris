@@ -3,7 +3,8 @@ import HomePage from "../../pages/home";
 import PlacesPage from "../../pages/places";
 import BlogPage from "../../pages/blog";
 import EventsPage from "../../pages/events";
-
+import User from '../../pages/user'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 
 export const routes = [
@@ -28,5 +29,5 @@ export const routes = [
   },
   { path: "/4", label: "Menu Item 4", icon: <Home />, element: <HomePage /> },
   { path: "/5", label: "Menu Item 5", icon: <Home />, element: <HomePage /> },
-  { path: "/user", label: "Menu Item 6", icon: <Home />, element: <User /> },
+  { path: "/user", label: "Menu Item 6", icon: <AdminPanelSettingsIcon />, element: <User /> },
 ];

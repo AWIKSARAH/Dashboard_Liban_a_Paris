@@ -11,7 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function TableBodyCom(props) {
-  const rows = props.rows.map((cells) => ({ ...cells  } ));
+  const rows = props.rows.map((cells) => ({ ...cells }));
+
   return (
     <TableBody>
       {rows.map((row, key) => (
@@ -35,6 +36,7 @@ function TableBodyCom(props) {
                 textAlign: column.type === "boolean" && "center",
               }}
             >
+              {/* {console.log("id"+row._id)} */}
               {column.type === "boolean" ? (
                 <Switch
                   defaultChecked={row[column.access]}
@@ -70,6 +72,7 @@ function TableBodyCom(props) {
                   "--fa-primary-color": "red",
                   "--fa-secondary-color": "#10c14e",
                 }}
+                onClick={() => props.handleDelete(row._id)}
               />
             </Button>
           </TableCell>
