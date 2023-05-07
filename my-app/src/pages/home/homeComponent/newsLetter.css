@@ -1,0 +1,203 @@
+.newsLetter__card {
+  width: 450px;
+  background: #FFFFFF;
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 11px;
+  scroll-behavior: smooth;
+  overflow-y:scroll
+}
+
+.newsLetter__search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.newsLetter__search-container  {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: none;
+  font-size: 13px;
+}
+
+.newsLetter__categories {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0px 20px 20px 20px;
+}
+
+.newsLetter__categories button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 15px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0px 0.5px 0.5px #EFEFEF, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
+  border-radius: 20px;
+  font-weight: 600;
+  color: #171718;
+  transition: all 0.6s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+ button:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+.newsLetter__results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsLetter__results hr {
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background-color: #ECECEC;
+}
+
+.newsLetter__results p {
+  padding: 0 20px;
+}
+
+p.newsLetter__label {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 10px;
+  word-spacing: 1px;
+  color: #5F6368;
+}
+
+.newsLetter__results .newsLetter__entry {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  gap: 12px;
+  padding: 5px 20px;
+  transition: all 0.2s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.newsLetter__results .newsLetter__entry:hover {
+  background-color: #F5F8FE;
+}
+
+.newsLetter__results .newsLetter__results-list .newsLetter__entry:hover .newsLetter__icon {
+  background-color: #1763fa;
+}
+
+.newsLetter__results .newsLetter__results-list .newsLetter__entry:hover .newsLetter__icon svg path,
+.newsLetter__results .newsLetter__results-list .newsLetter__entry:hover .newsLetter__icon svg circle {
+  stroke: #ffffff;
+}
+
+.newsLetter__results .newsLetter__results-list .newsLetter__entry:hover label {
+  color: #1763fa;
+}
+
+.newsLetter__results .newsLetter__results-list .newsLetter__entry:hover span {
+  color: #7ba0eb;
+}
+
+.newsLetter__results .newsLetter__results-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsLetter__results .newsLetter__entry .newsLetter__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ECECEC;
+  border-radius: 7px;
+  transition: all 0.2s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.newsLetter__results .newsLetter__entry .newsLetter__desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.newsLetter__results .newsLetter__entry .newsLetter__desc label {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #171718;
+}
+
+.newsLetter__results .newsLetter__entry .newsLetter__desc span {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  color: #72767c;
+}
+
+.newsLetter__results .enewsLetter__ntry .newsLetter__badge {
+  width: 40px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background: #DDFFDE;
+  border: 1px solid #08581d0e;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #08581D;
+}
+
+.newsLetter__card-footer {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 10px;
+  padding: 0 7px;
+  background: #F8F8F8;
+}
+
+.newsLetter__card .newsLetter__action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.newsLetter__card .newsLetter__action p {
+  padding-left: 5px;
+}
+
+.newsLetter__card-footer button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 0;
+  background: #ECECEC;
+  outline: none;
+}
+
+.newsLetter__edit-actions {
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  opacity: 0.6;
+}
+
+.quantity {
+  font-size: 25px;
+  font-weight: 600;
+ }
