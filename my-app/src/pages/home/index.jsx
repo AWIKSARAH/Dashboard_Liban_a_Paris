@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
       <PageHeader label="Home Page" />
-      <SearchBar />
+      
     </>
   );
 }

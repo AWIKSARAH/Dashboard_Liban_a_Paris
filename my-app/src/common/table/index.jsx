@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import TableHead from "./tableHead";
 import TableBody from "./tableBody";
 import { Loader } from "../../components/loader";
-
 function TableContent(props) {
   const handlePageChange = (event, value) => {
     props.setCurrentPage(value);
@@ -13,17 +12,21 @@ function TableContent(props) {
   return (
     <Box sx={{ overflow: "auto" }}>
       <Box sx={{ width: "100%" }}>
+ 
         <TableContainer
           component={Paper}
           sx={{ overflow: "auto", borderRadius: "0" }}
         >
           <Table sx={{ minWidth: "100%" }}>
+         
             <TableHead columns={props.columns} />
+       
             {!props.isLoading && !props.error ? (
               <TableBody
                 rows={props.rows}
                 columns={props.columns}
                 handleEdit={props.handleEdit}
+                handleSave={props.handleSave}
                 handleDelete={props.handleDelete}
                 handleConfirmationChange={props.handleConfirmationChange}
               />

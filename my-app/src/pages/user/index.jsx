@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import PageHeader from "../../components/pageHeader";
 import TableContent from "../../common/table";
 // import { Loader } from "../../components/loader";
-import EditPlaceDialog from "./userEdit";
+import EditUserDialog from "./userEdit";
+import OpenUserDialog from "./userAdd";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
+import Button from "../../pages/user/userAdd/buttonAdd";
 
 function UsersPage() {
   const authHeader = useAuthHeader();
@@ -17,6 +19,8 @@ function UsersPage() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editId, setEditId] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [openSave, setOpenSave] = useState(false);
+
   const columns = [
     { label: "_id", access: "_id" },
     { label: "name", access: "name" },
@@ -32,6 +36,17 @@ function UsersPage() {
   const handleEditClose = (ref = false) => {
     setEditId("");
     setOpenEdit(false);
+    if (ref) {
+      setRefresh(!refresh);
+    }
+  };
+
+
+  const handleSave = (id) => {
+    setOpenSave(true);
+  };
+  const handleSaveClose = (ref = false) => {
+    setOpenSave(false);
     if (ref) {
       setRefresh(!refresh);
     }
@@ -90,7 +105,8 @@ function UsersPage() {
   return (
     <>
       <PageHeader label="Users" setSearchQuery={setQuery} />
-
+      <Button onClick={() => handleSave()}>
+            </Button>
       <TableContent
         rows={onlyStringData}
         columns={columns}
@@ -99,13 +115,18 @@ function UsersPage() {
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
         handleEdit={handleEdit}
+        handleSave={handleSave}
         handleDelete={handleDelete}
         handleConfirmationChange={handleConfirmationChange}
       />
-      <EditPlaceDialog
+      <EditUserDialog
         open={openEdit}
         onClose={handleEditClose}
         UserId={editId}
+      />
+       <OpenUserDialog
+        open={openSave}
+        onClose={handleSaveClose}
       />
     </>
   );
