@@ -1,10 +1,20 @@
 
 import React from "react";
 import "./newsLetter.css";
-import { Link } from "react-router-dom";
+import { Checkbox } from "@mui/material";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useAuthHeader } from "react-auth-kit";
 
 
-const LatestPlaces = ({ data,link,title }) => {
+const LatestPlaces = ({ data,title }) => {
+  const authHeaders=useAuthHeader()
+  const Authorization=authHeaders()
+  function handleConfirmation(value,id){
+    axios.patch(`${process.env.REACT_APP_API_URL}/${title}/confirm/${id}`,{confirmation:value},{headers:{Authorization}}).then(res=>{
+      if(res.data.success) toast.success(`${title} confirmed`)
+    }).catch(e=>console.log(e))
+  }
   return (
     <>
     
@@ -17,20 +27,14 @@ const LatestPlaces = ({ data,link,title }) => {
           See this Latest {title} and Confirm On it
         </p>
         {data.map((place) => (
-          <Link  to={link} key={place} className="newsLetter__results-list" >
-            <div className="newsLetter__entry">
+            <div className="newsLetter__entry" key={place._id}>
               <div className="newsLetter__icon">
-                <img
-                  src={`${process.env.REACT_APP_IMG_URL}${place.image}`}
-                  alt=""
-                />{" "}
+                <Checkbox onChange={e=>{handleConfirmation(e.target.checked,place._id)}}/>
               </div>
               <div className="newsLetter__desc">
-                <label>{place.ti1tle}</label>
+                <label>{place.title}</label>
               </div>
             </div>
-            <hr />
-          </Link>
         ))}
       </div>
     </div>
