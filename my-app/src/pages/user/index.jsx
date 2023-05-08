@@ -10,7 +10,6 @@ import { useAuthHeader } from "react-auth-kit";
 import Button from "../../common/buttonAdd";
 
 function UsersPage() {
-
   const authHeader = useAuthHeader();
   const [data, setData] = useState(null);
   const [query, setQuery] = useState([]);
@@ -42,7 +41,6 @@ function UsersPage() {
     }
   };
 
-
   const handleSave = () => {
     setOpenSave(true);
   };
@@ -56,10 +54,9 @@ function UsersPage() {
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       axios
-        .delete(
-          `${process.env.REACT_APP_API_URL}/user/${id}`,
-          { headers: { Authorization: authHeader() } }
-        )
+        .delete(`${process.env.REACT_APP_API_URL}/user/${id}`, {
+          headers: { Authorization: authHeader() },
+        })
         .then((response) => {
           response.data.success && toast.success("Confirmation Delete!");
           setRefresh(!refresh);
@@ -70,7 +67,7 @@ function UsersPage() {
         });
     }
   };
-  
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -106,8 +103,7 @@ function UsersPage() {
   return (
     <>
       <PageHeader label="Users" setSearchQuery={setQuery} />
-      <Button onClick={() => handleSave()}>
-            </Button>
+      <Button onClick={() => handleSave()}></Button>
       <TableContent
         rows={onlyStringData}
         columns={columns}
@@ -125,10 +121,7 @@ function UsersPage() {
         onClose={handleEditClose}
         UserId={editId}
       />
-       <OpenUserDialog
-        open={openSave}
-        onClose={handleSaveClose}
-      />
+      <OpenUserDialog open={openSave} onClose={handleSaveClose} />
     </>
   );
 }

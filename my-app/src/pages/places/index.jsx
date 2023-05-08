@@ -6,7 +6,8 @@ import TableContent from "../../common/table";
 import EditPlaceDialog from "./placeEdit";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
-
+import Button from "../../common/buttonAdd";
+import OpenPlaceDialog from './placeAdd'
 function PlacesPage() {
   const authHeader = useAuthHeader();
   const [data, setData] = useState(null);
@@ -17,6 +18,8 @@ function PlacesPage() {
   const [openEdit, setOpenEdit] = useState(false);
   const [editId, setEditId] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [openSave, setOpenSave] = useState(false);
+
   const columns = [
     { label: "_id", access: "_id" },
     { label: "Title", access: "title" },
@@ -39,6 +42,16 @@ function PlacesPage() {
     if (ref) {
       setRefresh(!refresh);
     }
+  };
+
+  const handleSaveClose = (ref = false) => {
+    setOpenSave(false);
+    if (ref) {
+      setRefresh(!refresh);
+    }
+  };
+  const handleSave = () => {
+    setOpenSave(true);
   };
   useEffect(() => {
     setIsLoading(true);
@@ -71,7 +84,7 @@ function PlacesPage() {
   return (
     <>
       <PageHeader label="Places" setSearchQuery={setQuery} />
-
+      <Button onClick={() => handleSave()}></Button>
       <TableContent
         rows={onlyStringData}
         columns={columns}
@@ -87,10 +100,10 @@ function PlacesPage() {
         onClose={handleEditClose}
         placeId={editId}
       />
+            <OpenPlaceDialog open={openSave} onClose={handleSaveClose} />
+
     </>
   );
 }
 
 export default PlacesPage;
-
-
