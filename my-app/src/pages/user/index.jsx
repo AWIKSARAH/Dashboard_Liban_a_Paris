@@ -7,7 +7,7 @@ import EditUserDialog from "./userEdit";
 import OpenUserDialog from "./userAdd";
 import { toast } from "react-hot-toast";
 import { useAuthHeader } from "react-auth-kit";
-import Button from "../../pages/user/userAdd/buttonAdd";
+import Button from "../../common/buttonAdd";
 
 function UsersPage() {
 
@@ -43,7 +43,7 @@ function UsersPage() {
   };
 
 
-  const handleSave = (id) => {
+  const handleSave = () => {
     setOpenSave(true);
   };
   const handleSaveClose = (ref = false) => {

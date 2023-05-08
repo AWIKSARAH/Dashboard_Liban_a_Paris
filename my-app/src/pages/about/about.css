@@ -1,0 +1,75 @@
+.contact-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+  }
+  
+  .contact-info-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .info-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .info-field label {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .social-media-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .social-media-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 1.5rem;
+  }
+  
+  .social-media-item a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .logo-container {
+    width: 300px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .aboutUs-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+  
+  button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #023e8a;
+  }
+  

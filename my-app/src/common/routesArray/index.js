@@ -3,12 +3,13 @@ import HomePage from "../../pages/home";
 import PlacesPage from "../../pages/places";
 import BlogPage from "../../pages/blog";
 import EventsPage from "../../pages/events";
-import User from '../../pages/user'
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-
-
+import User from "../../pages/user";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AboutUs from '../../pages/about'
 export const routes = [
   { path: "/home", label: "Dashboard", icon: <Home />, element: <HomePage /> },
+  { path: "/about", label: "AboutUs", icon: <Home />, element: <AboutUs /> },
+,
   {
     path: "/places",
     label: "Places",
@@ -27,7 +28,11 @@ export const routes = [
     icon: <Event />,
     element: <EventsPage />,
   },
-  { path: "/4", label: "Menu Item 4", icon: <Home />, element: <HomePage /> },
-  { path: "/5", label: "Menu Item 5", icon: <Home />, element: <HomePage /> },
-  { path: "/user", label: "Menu Item 6", icon: <AdminPanelSettingsIcon />, element: <User /> },
+
+  {
+    path: "/user",
+    label: "ManageAdmin",
+    icon: <AdminPanelSettingsIcon />,
+    element: <User />,
+  },
 ];
