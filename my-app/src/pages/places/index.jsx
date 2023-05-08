@@ -81,6 +81,24 @@ function PlacesPage() {
       })
       .catch((e) => toast.error("Something went wrong"));
   };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/places/${id}`, {
+          headers: { Authorization: authHeader() },
+        })
+        .then((response) => {
+          response.data.success && toast.success("Confirmation Delete!");
+          setRefresh(!refresh);
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error("Ooops --Something went wrong during the Delete!");
+        });
+    }
+  };
+
   return (
     <>
       <PageHeader label="Places" setSearchQuery={setQuery} />
@@ -93,6 +111,7 @@ function PlacesPage() {
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
         handleEdit={handleEdit}
+        handleDelete={handleDelete}
         handleConfirmationChange={handleConfirmationChange}
       />
       <EditPlaceDialog

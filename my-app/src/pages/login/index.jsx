@@ -32,17 +32,17 @@ export default function Login() {
           password: loginData.password,
         }
       );
-
+        console.log(response.data);
       const token = response.data.token;
         signIn(
           {
             token,
             expiresIn:3600,
             tokenType:"Bearer",
-            authState:{email:loginData.email}
+            authState:{email:loginData.email,isAdmin:response.data.user.IsAdmin},
           }
         )
-      navigate("/home");
+      navigate("/");
       // store token in localStorage
     } catch (error) {
       console.error(error);

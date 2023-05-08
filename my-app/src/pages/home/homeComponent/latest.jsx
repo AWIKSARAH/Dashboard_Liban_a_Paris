@@ -4,13 +4,17 @@ import "./newsLetter.css";
 import { Link } from "react-router-dom";
 
 
-const LatestPlaces = ({ data,link }) => {
+const LatestPlaces = ({ data,link,title }) => {
   return (
+    <>
+    
+    
     <div className="newsLetter__card">
+    <h1>{title}</h1>
       <div className="newsLetter__results">
         <p className="newsLetter__label">
           {" "}
-          See this Latest Places and Confirm On it
+          See this Latest {title} and Confirm On it
         </p>
         {data.map((place) => (
           <Link  to={link} key={place} className="newsLetter__results-list" >
@@ -22,7 +26,7 @@ const LatestPlaces = ({ data,link }) => {
                 />{" "}
               </div>
               <div className="newsLetter__desc">
-                <label>{place.title}</label>
+                <label>{place.ti1tle}</label>
               </div>
             </div>
             <hr />
@@ -30,6 +34,7 @@ const LatestPlaces = ({ data,link }) => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

@@ -81,7 +81,7 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
       onClose={(e) => onClose(false)}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Edit Place</DialogTitle>
+      <DialogTitle id="form-dialog-title">Edit Blog</DialogTitle>
       {loading ? (
         <DialogContent>
           <CircularProgress />

@@ -7,7 +7,7 @@ import User from "../../pages/user";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import AboutUs from '../../pages/about'
 export const routes = [
-  { path: "/home", label: "Dashboard", icon: <Home />, element: <HomePage /> },
+  { path: "/", label: "Dashboard", icon: <Home />, element: <HomePage /> },
   { path: "/about", label: "AboutUs", icon: <Home />, element: <AboutUs /> },
 ,
   {

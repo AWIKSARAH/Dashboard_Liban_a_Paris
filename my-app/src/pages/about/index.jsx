@@ -78,7 +78,7 @@ setRefresh(!refresh)
                   ))}
                 </div>
               </div>
-              <div className="info-field">
+              {/* <div className="info-field">
                 <label htmlFor="logo">Logo</label>
                 <div className="logo-container">
                   <img
@@ -86,14 +86,14 @@ setRefresh(!refresh)
                     alt={info.logo}
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="info-field">
                 <label htmlFor="aboutUs">About Us</label>
                 <div className="aboutUs-text">
                   {info.aboutUs ? info.aboutUs : "No description provided."}
                 </div>
               </div>
-              <button onClick={handleEditMode}>
+              <button className="info__button" onClick={handleEditMode}>
                 <FontAwesomeIcon icon={faEdit} />
                 Edit
               </button>

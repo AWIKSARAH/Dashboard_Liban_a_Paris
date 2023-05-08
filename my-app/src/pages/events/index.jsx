@@ -41,7 +41,23 @@ function EventsPage() {
     return cleanedData;
   }
   
-  
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this Event?")) {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/events/Delete/${id}`, {
+          headers: { Authorization: authHeader() },
+        })
+        .then((response) => {
+          response.data.success && toast.success("Confirmation Delete!");
+          setRefresh(!refresh);
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error("Ooops --Something went wrong during the Delete!");
+        });
+    }
+  };
+
   const handleEdit = (id) => {
     setEditId(id);
     setOpenEdit(true);
@@ -94,6 +110,7 @@ function EventsPage() {
         pageCount={data?.totalPages || null}
         isLoading={isLoading}
         error={error}
+        handleDelete={handleDelete}
         handleEdit={handleEdit}
         handleConfirmationChange={handleConfirmationChange}
       />

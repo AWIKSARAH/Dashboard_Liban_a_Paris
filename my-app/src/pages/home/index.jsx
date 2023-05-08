@@ -39,7 +39,7 @@ function HomePage() {
   console.log(data);
   return (
     <>
-      <PageHeader label="Home Page" />
+      <PageHeader label="Home Page" disableSearch/>
       <div className="home__container">
         <div className="home__first__div">
           <Card
@@ -52,7 +52,7 @@ function HomePage() {
             className="div2"
             title={"Events"}
             value={data.eventCount}
-            link={"/events"}
+            link={"/event"}
           ></Card>
           <Card
             className="div3"
@@ -64,17 +64,21 @@ function HomePage() {
         {console.log(data)}
         <div className="Home__second_container">
           <div className="home__second__div">
-            <LatestPlaces
-              data={event}
-              link={"/events"}
-              handleRefresh={handleRefresh}
-            />
-            <LatestPlaces
+          <LatestPlaces
               data={place}
-              link={"/places"}
+              link={"/place"}
+              title={'Places'}
               handleRefresh={handleRefresh}
             />
 
+            <LatestPlaces
+              data={event}
+              link={"/event"}
+              title={'Events'}
+
+              handleRefresh={handleRefresh}
+            />
+            
             <NewsLetter data={newsLetter} handleRefresh={handleRefresh} />
           </div>
         </div>

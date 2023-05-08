@@ -9,6 +9,7 @@ import {
   TextField,
   Select,
   MenuItem,
+  InputLabel
 } from "@mui/material";
 import "./placeEdit.css";
 import axios from "axios";
@@ -229,6 +230,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
               }}
             />
             <div>
+            <InputLabel>Place Type</InputLabel>
               <Select value={placeType} onChange={handlePlaceTypeChange}>
                 {placeTypes.map((type) => (
                   <MenuItem key={type} value={type}>

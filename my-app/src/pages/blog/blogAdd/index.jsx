@@ -7,6 +7,9 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@mui/material";
 import "./blogEdit.css";
 import axios from "axios";
@@ -14,9 +17,8 @@ import { useEffect, useState } from "react";
 import ImageInput2 from "./imageInput";
 import { toast } from "react-hot-toast";
 
-
-const EditBlogDialog = ({ open, onClose, blogId }) => {
-  const [loading, setLoading] = useState(true);
+const EditBlogDialog = ({ open, onClose }) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -25,27 +27,19 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
   const [image, setImage] = useState("");
   const [imageObj, setImageObj] = useState("");
 
-  useEffect(() => {
-    const fetchPlace = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/blog/${blogId}`
-        );
-        console.log(response)
-        setTitle(response.data.data.title);
-        setDescription(response.data.data.description);
-        setTags(response.data.data.tags?.join(','));
-        setImage(response.data.data.image);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (open) {
-      fetchPlace();
-    }
-  }, [open, blogId]);
+  const types = [
+    "jobs",
+    "housing",
+    "sale",
+    "activities",
+    "invitations",
+    "discounts",
+    "blog",
+    "tourism",
+    "youth",
+  ];
+  const [type, setType] = useState("");
+
 
   const handleSave = async () => {
     const formData = new FormData();
@@ -60,19 +54,21 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
       var data = {
         title,
         description,
-        tags:tags.split(",").map(e=>e.trim()),
+        tags: tags.split(",").map((e) => e.trim()),
         image: uploadResponse?.data.image,
+        type
       };
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/blog/${blogId}`,
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/blog/`,
         data
       );
       response.data.success === true &&
-        toast.success("Blog Updated Successfully");
+        toast.success("Blog Created Successfully");
 
       onClose(true);
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
   return (
@@ -81,7 +77,7 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
       onClose={(e) => onClose(false)}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Edit Place</DialogTitle>
+      <DialogTitle id="form-dialog-title">Add New Blog</DialogTitle>
       {loading ? (
         <DialogContent>
           <CircularProgress />
@@ -124,7 +120,20 @@ const EditBlogDialog = ({ open, onClose, blogId }) => {
               value={tags}
               onChange={(e) => setTags(e.target.value)}
             />
-
+            <InputLabel id="type-label">Type</InputLabel>
+            <Select
+              labelId="type-label"
+              id="type"
+              name="type"
+              value={type}
+              onChange={e=>setType(e.target.value)}
+            >
+              {types.map((type) => (
+                <MenuItem key={type} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
             <ImageInput2 image={image} setImage={setImageObj} />
           </DialogContent>
           <DialogActions>

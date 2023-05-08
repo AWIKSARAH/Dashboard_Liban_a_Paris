@@ -7,7 +7,7 @@ function PageHeader(props) {
   return (
     <div className="page--header_container">
       <h2>{props.label}</h2>
-      <SearchBar onSearchClick={handleSearchChange} />
+      {!props.disableSearch?<SearchBar onSearchClick={handleSearchChange} />:<></>}
     </div>
   );
 }

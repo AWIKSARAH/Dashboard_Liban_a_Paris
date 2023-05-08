@@ -6,7 +6,7 @@ import TableContent from "../../common/table";
 import EditUserDialog from "./userEdit";
 import OpenUserDialog from "./userAdd";
 import { toast } from "react-hot-toast";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import Button from "../../common/buttonAdd";
 
 function UsersPage() {
@@ -67,7 +67,8 @@ function UsersPage() {
         });
     }
   };
-
+  const auth=useAuthUser()
+  console.log(auth().isAdmin);
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -77,7 +78,6 @@ function UsersPage() {
       .then((response) => {
         setData(response.data.message);
         setOnlyStringData(response.data.message.docs);
-        console.log(response);
         setIsLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
