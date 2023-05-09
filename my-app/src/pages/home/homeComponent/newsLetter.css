@@ -3,7 +3,8 @@
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 11px;
   scroll-behavior: smooth;
-  overflow-y:scroll
+  overflow-y:scroll;
+  width: 300px;
 }
 
 .newsLetter__search-container {

@@ -6,6 +6,7 @@ import logo from "../../Le-Liban-A-Paris-Noir-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSignIn } from "react-auth-kit";
+import { toast } from "react-hot-toast";
 
 
 export default function Login() {
@@ -45,6 +46,7 @@ export default function Login() {
       navigate("/");
       // store token in localStorage
     } catch (error) {
+      toast.error("Wrong Credentials")
       console.error(error);
     }
   };

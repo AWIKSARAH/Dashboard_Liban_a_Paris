@@ -21,11 +21,10 @@
 }
 
 .home__second__div {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 @media (max-width: 767px) {
   .home__first__div {
@@ -33,14 +32,13 @@
     flex-direction: column;
     gap: 20px;
   }
-  .home__first__div a{
+  .home__first__div a {
     width: 100%;
   }
   .home__second__div {
     flex-direction: column;
     gap: 20px;
-    }
-
+  }
 }
 
 .home__newsLetter__div {
@@ -64,6 +62,6 @@
   align-items: center;
   flex-wrap: nowrap;
   flex-direction: row-reverse;
-  justify-content: flex-end;
   gap: 25%;
+  width: 90%;
 }

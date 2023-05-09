@@ -1,6 +1,17 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
-const socialMediaOptions = ["facebook", "twitter", "instagram", "linkedIn"];
+const socialMediaOptions = [
+  "facebook",
+  "instagram",
+  "twitter",
+  "linkedIn",
+  "snapchat",
+  "pinterest",
+  "youtube",
+  "tiktok",
+  "whatsapp",
+  "telegram",
+];
 
 function SocialMedia(props) {
   return (
@@ -10,7 +21,7 @@ function SocialMedia(props) {
         <Select
         sx={{width:"130px"}}
           name="name"
-          value={props.item.name}
+          value={props.item.name.toLowerCase()}
           onChange={(e) => props.handleSocialMediaChange(props.index, e)}
         >
           {socialMediaOptions.map((option, index) => {

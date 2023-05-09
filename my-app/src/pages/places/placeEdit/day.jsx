@@ -1,7 +1,15 @@
 import React from "react";
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 function ScheduleDay({ day, schedule, setSchedule }) {
+  console.log("Schedule",schedule)
   const handleFromTimeChange = (e) => {
     setSchedule({
       ...schedule,
@@ -25,41 +33,48 @@ function ScheduleDay({ day, schedule, setSchedule }) {
   };
 
   return (
-    <Box key={day} sx={{marginBottom:"10px"}}>
-      <div style={{marginBottom:"10px"}}>
-      {day.charAt(0).toUpperCase() + day.slice(1)}:
-        
+    <Box key={day} sx={{ marginBottom: "10px" }}>
+      <div style={{ marginBottom: "10px" }}>
+        {day.charAt(0).toUpperCase() + day.slice(1)}:
       </div>
-        <Box display="flex">
-      <FormControl>
-        <InputLabel>Status</InputLabel>
-        <Select
-        sx={{width:"100px"}}
-          value={schedule[day].status}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              [day]: { ...schedule[day], status: e.target.value },
-            })
-          }
-        >
-          <MenuItem value="closed">Closed</MenuItem>
-          <MenuItem value="open">Open</MenuItem>
-        </Select>
-      </FormControl>
+      <Box display="flex">
+        <FormControl>
+          <InputLabel>Status</InputLabel>
+          <Select
+            sx={{ width: "100px" }}
+            defaultValue={schedule[day].status}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                [day]: { ...schedule[day], status: e.target.value },
+              })
+            }
+          >
+            <MenuItem value="Closed">Closed</MenuItem>
+            <MenuItem value="Open">Open</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           type="time"
           label="From"
-          value={schedule[day].fromTo.split("-")[0]}
+          defaultValue={
+            schedule[day].status === "Open"
+              ? schedule[day].fromTo.split("-")[0].trim()
+              : null
+          }
           onChange={handleFromTimeChange}
-          disabled={schedule[day].status === "closed"}
+          disabled={schedule[day].status === "Closed"}
         />
         <TextField
           type="time"
           label="To"
-          value={schedule[day].fromTo.split("-")[1]}
+          defaultValue={
+            schedule[day].status === "Open"
+              ? schedule[day].fromTo.split("-")[1].trim()
+              : null
+          }
           onChange={handleToTimeChange}
-          disabled={schedule[day].status === "closed"}
+          disabled={schedule[day].status === "Closed"}
         />
       </Box>
     </Box>

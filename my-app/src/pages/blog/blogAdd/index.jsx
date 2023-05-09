@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import "./blogEdit.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import ImageInput2 from "./imageInput";
 import { toast } from "react-hot-toast";
 
@@ -59,7 +59,7 @@ const EditBlogDialog = ({ open, onClose }) => {
         type
       };
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/blog/`,
+        `${process.env.REACT_APP_API_URL}/blog`,
         data
       );
       response.data.success === true &&

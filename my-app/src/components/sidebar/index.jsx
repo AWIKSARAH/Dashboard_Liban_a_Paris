@@ -40,10 +40,7 @@ function Sidebar() {
           <div className="sidebar--nav_container">{linkMapper(routes,auth().isAdmin)}</div>
         </div>
         <div className="sidebar--bottom sidebar--nav_container">
-          <Link>
-            <Settings />
-            Settings
-          </Link>
+      
           <Link onClick={handleLogOut}>
             <Logout />
             Logout

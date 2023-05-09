@@ -4,16 +4,16 @@
 *{
   font-family: 'Roboto', sans-serif;
 }
-:root{
-  --primary:#00143c;
-  --primary-derv:#8ab7c4;
-  --secondary:#f9f3ed;
-  --secondary-derv:#dbf7cc;
-  --accent:#CC3D3F;
-  --accent-derv:#5e2e2f;
-  --black:#2d2d2e;
-  
+:root {
+  --primary: #297d4b;        
+  --primary-derv: #56a77b;   
+  --secondary: #FFFFFF;      
+  --secondary-derv: #F2F2F2; 
+  --accent: #cc0000;         
+  --accent-derv: #ff5e5e;    
+  --black: #333333;          
 }
+
 /* :root{
   --primary:#c02a2c;
   --primary-derv:#c97878;

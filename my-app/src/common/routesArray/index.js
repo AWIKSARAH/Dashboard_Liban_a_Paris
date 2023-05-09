@@ -5,11 +5,10 @@ import BlogPage from "../../pages/blog";
 import EventsPage from "../../pages/events";
 import User from "../../pages/user";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import AboutUs from '../../pages/about'
+import AboutUs from "../../pages/about";
 export const routes = [
   { path: "/", label: "Dashboard", icon: <Home />, element: <HomePage /> },
-  { path: "/about", label: "AboutUs", icon: <Home />, element: <AboutUs /> },
-,
+  { path: "/about", label: "About Us", icon: <Home />, element: <AboutUs /> },
   {
     path: "/places",
     label: "Places",
@@ -28,7 +27,6 @@ export const routes = [
     icon: <Event />,
     element: <EventsPage />,
   },
-
   {
     path: "/user",
     label: "ManageAdmin",

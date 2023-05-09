@@ -61,6 +61,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
           `${process.env.REACT_APP_API_URL}/places/${placeId}`
         );
         // setPlace(response.data.data);
+        console.log(response);
         setTitle(response.data.data.title);
         setEmail(response.data.data.email);
         setTel(response.data.data.tel);
@@ -105,7 +106,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
     try {
       if (imageObj) {
         var uploadResponse = await axios.post(
-          "http://localhost:5000/api/files/places",
+          "http://localhost:5000/api/files/place",
           formData,
           { headers: { Authorization: authHeader() } }
         );
@@ -245,6 +246,7 @@ const EditPlaceDialog = ({ open, onClose, placeId }) => {
       />
     ));
   }
+
   function socialMapper() {
     return socialMedia.map((item, index) => (
       <SocialMedia

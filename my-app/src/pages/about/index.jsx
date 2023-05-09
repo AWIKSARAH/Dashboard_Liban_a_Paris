@@ -72,7 +72,7 @@ setRefresh(!refresh)
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {socialMedia.name}
+                        {socialMedia.name.charAt(0).toUpperCase()+socialMedia.name.slice(1)}
                       </a>
                     </div>
                   ))}
